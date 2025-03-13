@@ -6,4 +6,16 @@ It is a part of a larger [toolkit](https://github.com/FHS-BAP/Voice-Feature-Extr
 ## Overview
 | Name | Description |
 | - | - |
-| **standardize** | Standardize audio files with varying metadata to a standard format using libraries such as [pydub](https://github.com/jiaaro/pydub).
+| **pydub** | Standardize digital voice audio files with varying metadata to a standard format using [pydub](https://github.com/jiaaro/pydub).
+
+## Citations
+```bibtex
+@inproceedings{commonvoice:2020,
+  author = {Ardila, R. and Branson, M. and Davis, K. and Henretty, M. and Kohler, M. and Meyer, J. and Morais, R. and Saunders, L. and Tyers, F. M. and Weber, G.},
+  title = {Common Voice: A Massively-Multilingual Speech Corpus},
+  booktitle = {Proceedings of the 12th Conference on Language Resources and Evaluation (LREC 2020)},
+  pages = {4211--4215},
+  year = 2020
+}
+
+```

@@ -14,9 +14,9 @@ sample_audio
    |-- mp3
    |   |-- common_voice_en_21635524.mp3
 ```
-| filename | sampling_rate | encoding | channels | origin |
+| filename | sampling_rate (Hz)| encoding | channels | origin |
 | - | - | - | - | - |
-| common_voice_en_21635524.mp3 | 48KHz | Lavf57.56.101 | mono |[Common Voice Corpus 13.0](https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0)|
+| common_voice_en_21635524.mp3 | 48000 | Lavf57.56.101 | mono |[Common Voice Corpus 13.0](https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0)|
 
 ## Citations
 ```bibtex

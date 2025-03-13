@@ -8,6 +8,16 @@ It is a part of a larger [toolkit](https://github.com/FHS-BAP/Voice-Feature-Extr
 | - | - |
 | **pydub** | Standardize digital voice audio files with varying metadata to a standard format using [pydub](https://github.com/jiaaro/pydub).
 
+## Sample Input Files
+```
+sample_audio
+   |-- mp3
+   |   |-- common_voice_en_21635524.mp3
+```
+| filename | sampling_rate | encoding | channels | origin |
+| - | - | - | - | - |
+| common_voice_en_21635524.mp3 | 48KHz | Lavf57.56.101 | mono |[Common Voice Corpus 13.0](https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0)|
+
 ## Citations
 ```bibtex
 @inproceedings{commonvoice:2020,

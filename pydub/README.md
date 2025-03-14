@@ -50,8 +50,7 @@ The following instructions have been taken from [pydub's documentation](http://g
 Windows ffmpeg installation:
 1. Download [FFmpeg's package for Windows](https://www.ffmpeg.org/download.html#build-windows)
 2. Locate the download location of the ZIP file and extract to your desired destination (site-packages)
-3. Edit you Environment Variables (Win + S)
-   Click on path > edit > New and enter the path to the extracted folder of FFmpeg
+3. Edit you Environment Variables (Win + S). Click on path > edit > New and enter the path to the extracted folder of FFmpeg.
 4. Verify your installation with the command
    ```sh
    ffmpeg -version
@@ -74,17 +73,17 @@ After installation, navigate to `run_standardize.py`. In `main()` provides examp
 
 The `run_standardize.py` script generates the below, adjusting to a sampling rate of 16KHz, .WAV file, and pcm_s16le encoding. It also includes converting stereo channels to mono for first_ten_Sample_HV_Clip.flac and first_ten_Sample_HV_Clip.wav.
 
-| output file | original file | old / new sampling_rate (Hz)| old / new encoding | old / new channels |
-| - | - | - | - | - | - |
-| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.flac | 44100 / 16000 | Lavf61.9.106 / pcm_s16le | stereo / mono |
-| mono_first_ten_Sample_HV_Clip.wav | mono_first_ten_Sample_HV_Clip.flac | 44100 / 16000 | Lavf61.9.106 / pcm_s16le | mono / mono |
-| mono_zoom_audio.wav | mono_zoom_audio.m4a | 48000 / 16000 | Lavf61.9.106 / pcm_s16le | mono / mono |
-| sample_zoom_audio.wav | sample_zoom_audio.m4a | 48000 / 16000 | AAC (Advanced Audio Coding) / pcm_s16le | stereo / stereo |
-| common_voice_en_21635524.wav | common_voice_en_21635524.mp3 | 48000 / 16000 | Lavf57.56.101 / pcm_s16le | mono / mono |
-| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.mp3 | 44100 / 16000 | Lavf61.9.106 / pcm_s16le | stereo  / stereo |
-| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.wav | 44100 / 16000  | Lavf59.16.100 / pcm_s16le | stereo / stereo |
-| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.wav | 44100 / 16000  | Lavf59.16.100 / pcm_s16le | stereo / mono |
-| mono_first_ten_Sample_HV_Clip.wav | mono_first_ten_Sample_HV_Clip.wav | 16000 / 16000 | Lavf61.9.106 / pcm_s16le | mono / mono |
+| output file | original file | old - new sampling_rate (Hz)| old - new encoding | old - new channels |
+| - | - | - | - | - |
+| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.flac | 44100 - 16000 | Lavf61.9.106 - pcm_s16le | stereo - mono |
+| mono_first_ten_Sample_HV_Clip.wav | mono_first_ten_Sample_HV_Clip.flac | 44100 - 16000 | Lavf61.9.106 - pcm_s16le | mono - mono |
+| mono_zoom_audio.wav | mono_zoom_audio.m4a | 48000 - 16000 | Lavf61.9.106 - pcm_s16le | mono - mono |
+| sample_zoom_audio.wav | sample_zoom_audio.m4a | 48000 - 16000 | AAC (Advanced Audio Coding) - pcm_s16le | stereo - stereo |
+| common_voice_en_21635524.wav | common_voice_en_21635524.mp3 | 48000 - 16000 | Lavf57.56.101 - pcm_s16le | mono - mono |
+| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.mp3 | 44100 - 16000 | Lavf61.9.106 - pcm_s16le | stereo  - stereo |
+| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.wav | 44100 - 16000  | Lavf59.16.100 - pcm_s16le | stereo - stereo |
+| first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.wav | 44100 - 16000  | Lavf59.16.100 - pcm_s16le | stereo - mono |
+| mono_first_ten_Sample_HV_Clip.wav | mono_first_ten_Sample_HV_Clip.wav | 16000 - 16000 | Lavf61.9.106 - pcm_s16le | mono - mono |
 
 ### Sample Input and Output Files
 

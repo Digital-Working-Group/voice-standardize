@@ -11,12 +11,29 @@ It is a part of a larger [toolkit](https://github.com/FHS-BAP/Voice-Feature-Extr
 ## Sample Input Files
 ```
 sample_audio
-   |-- mp3
-   |   |-- common_voice_en_21635524.mp3
+ |-- flac
+ | |-- first_ten_Sample_HV_Clip.flac
+ | |-- mono_first_ten_Sample_HV_Clip.flac
+ |-- m4a
+ | |-- mono_zoom_audio.m4a
+ | |-- sample_zoom_audio.m4a
+ |-- mp3
+ | |-- common_voice_en_21635524.mp3
+ | |-- first_ten_Sample_HV_Clip.mp3
+ |-- wav
+ | |-- first_ten_Sample_HV_Clip.wav
+ | |-- mono_first_ten_Sample_HV_Clip.wav
 ```
-| filename | sampling_rate (Hz)| encoding | channels | origin |
-| - | - | - | - | - |
-| common_voice_en_21635524.mp3 | 48000 | Lavf57.56.101 | mono |[Common Voice Corpus 13.0](https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0)|
+| filename | sampling_rate (Hz)| encoding | channels | channel_layout | origin |
+| - | - | - | - | - | - |
+| first_ten_Sample_HV_Clip.flac | 44100 | Lavf61.9.106 |  2 |stereo | - |
+| mono_first_ten_Sample_HV_Clip.flac | 44100 | Lavf61.9.106 | 1 | mono | - |
+| mono_zoom_audio.m4a | 48000 | Lavf61.9.106 | 1 | mono | - |
+| sample_zoom_audio.m4a | 48000 | AAC (Advanced Audio Coding) | 2 | stereo | - |
+| common_voice_en_21635524.mp3 | 48000 | Lavf57.56.101 | 1 | mono |[Common Voice Corpus 13.0](https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0)|
+| first_ten_Sample_HV_Clip.mp3 | 44100 | Lavf61.9.106 | 2 | stereo | - |
+| first_ten_Sample_HV_Clip.wav | 44100 | Lavf59.16.100 | 2 | unknown | - |
+| mono_first_ten_Sample_HV_Clip.wav | 44100 | Lavf61.9.106 | 1 | unknown | - |
 
 ## Citations
 ```bibtex

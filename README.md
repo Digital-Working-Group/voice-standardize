@@ -26,14 +26,14 @@ sample_audio
 ```
 | filename | sampling_rate (Hz)| encoding | channels | channel_layout | origin |
 | - | - | - | - | - | - |
-| first_ten_Sample_HV_Clip.flac | 44100 | Lavf61.9.106 |  2 |stereo | - |
-| mono_first_ten_Sample_HV_Clip.flac | 44100 | Lavf61.9.106 | 1 | mono | - |
-| mono_zoom_audio.m4a | 48000 | Lavf61.9.106 | 1 | mono | - |
-| sample_zoom_audio.m4a | 48000 | AAC (Advanced Audio Coding) | 2 | stereo | - |
+| first_ten_Sample_HV_Clip.flac | 44100 | Lavf61.9.106 |  2 |stereo | FHS-BAP Sample Data |
+| mono_first_ten_Sample_HV_Clip.flac | 44100 | Lavf61.9.106 | 1 | mono | FHS-BAP Sample Data |
+| mono_zoom_audio.m4a | 48000 | Lavf61.9.106 | 1 | mono | FHS-BAP Sample Data |
+| sample_zoom_audio.m4a | 48000 | AAC (Advanced Audio Coding) | 2 | stereo | FHS-BAP Sample Data |
 | common_voice_en_21635524.mp3 | 48000 | Lavf57.56.101 | 1 | mono |[Common Voice Corpus 13.0](https://huggingface.co/datasets/mozilla-foundation/common_voice_13_0)|
-| first_ten_Sample_HV_Clip.mp3 | 44100 | Lavf61.9.106 | 2 | stereo | - |
-| first_ten_Sample_HV_Clip.wav | 44100 | Lavf59.16.100 | 2 | unknown | - |
-| mono_first_ten_Sample_HV_Clip.wav | 44100 | Lavf61.9.106 | 1 | unknown | - |
+| first_ten_Sample_HV_Clip.mp3 | 44100 | Lavf61.9.106 | 2 | stereo | FHS-BAP Sample Data |
+| first_ten_Sample_HV_Clip.wav | 44100 | Lavf59.16.100 | 2 | unknown | FHS-BAP Sample Data |
+| mono_first_ten_Sample_HV_Clip.wav | 44100 | Lavf61.9.106 | 1 | unknown | FHS-BAP Sample Data |
 
 ## Citations
 ```bibtex
@@ -44,5 +44,4 @@ sample_audio
   pages = {4211--4215},
   year = 2020
 }
-
 ```

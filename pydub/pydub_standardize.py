@@ -3,7 +3,9 @@ pydub_standardize.py
 standardize via pydub
 """
 import os
+import csv
 from pydub import AudioSegment
+from pydub.utils import mediainfo
 
 def get_parameters(parameter_dict):
     """
@@ -16,9 +18,35 @@ def get_parameters(parameter_dict):
         parameters.extend([f'-{str(ffmpeg_switch)}', str(parameter_value)])
     return parameters
 
-def get_outpath_and_infile_ext(audio_fp, out_root, out_fmt, parameter_dict):
+def write_csv(filename, data):
     """
-    construct an outpath based on the audio_fp and parameters;
+    Writes to a csv file
+    """
+    with open(filename, 'w', newline= '') as outfile:
+        writer = csv.writer(outfile)
+        writer.writerows(data)
+    print(f'See {filename} for CSV output.')
+
+def validate_metadata(filepath, parameter_dict):
+    """
+    Compares metadata from output to expected values
+    """
+    mismatch = []
+    map_keys = {'ac': 'channels',
+                'ar': 'sample_rate',
+                'c:a': 'codec_name'}
+    info = mediainfo(filepath)
+    for option in parameter_dict:
+        if str(parameter_dict[option]) != info[map_keys[option]]:
+            mismatch.append([option, parameter_dict[option], info[map_keys[option]]])
+    if mismatch != []:
+        filename = os.path.splitext(os.path.basename(filepath))[0]
+        mismatch.insert(0, ['option', 'expected', 'actual'])
+        write_csv(f'validate/{filename}.csv', mismatch)
+    
+def get_outpath(audio_fp, out_root, out_fmt, parameter_dict):
+    """
+    Construct an outpath based on the audio_fp and parameters;
     """
     audio_base, infile_ext = os.path.splitext(os.path.basename(audio_fp))
     out_fname = f'{audio_base}.{out_fmt}'
@@ -28,7 +56,7 @@ def get_outpath_and_infile_ext(audio_fp, out_root, out_fmt, parameter_dict):
     out_parent_dir = os.path.join(os.path.dirname(audio_fp), out_root, parameter_ext)
     if not os.path.isdir(out_parent_dir):
         os.makedirs(out_parent_dir)
-    return os.path.join(out_parent_dir, out_fname), infile_ext
+    return os.path.join(out_parent_dir, out_fname)
 
 def standardize(audio_fp, **kwargs):
     """
@@ -38,12 +66,18 @@ def standardize(audio_fp, **kwargs):
     out_fmt = kwargs.get('out_fmt', 'wav')
     out_encoding = kwargs.get('out_encoding', 'pcm_s16le')
     out_ffmpeg_kw = kwargs.get('out_ffmpeg_kw', {})
+    to_mono = kwargs.get('to_mono', False)
+    run_validate = kwargs.get('run_validate', False)
     parameter_dict = {'ar': sampling_rate, 'c:a': out_encoding}
     parameter_dict.update(out_ffmpeg_kw)
+    if to_mono:
+        parameter_dict.update({'ac': 1})
     out_root = kwargs.get('out_root', 'pydub')
 
-    outpath, infile_ext = get_outpath_and_infile_ext(audio_fp, out_root, out_fmt, parameter_dict)
+    outpath = get_outpath(audio_fp, out_root, out_fmt, parameter_dict)
     parameters = get_parameters(parameter_dict)
     infile = AudioSegment.from_file(audio_fp, )
     infile.export(outpath, format=out_fmt, parameters=parameters)
-    print(outpath)
+    if run_validate:
+        validate_metadata(outpath, parameter_dict)
+    print(f'See {outpath} for the standardized audio file.')

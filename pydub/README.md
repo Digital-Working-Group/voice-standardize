@@ -90,7 +90,8 @@ This would output a .WAV file standardized to have a sampling rate of 16KHz (`sa
 You can see several examples in `run_standardize.main()`.
 
 ### Sample Input and Output Files and Metadata
-Several sample audio files with varying formats and metadata. Each audio file's metadata is captured in a JSON and CSV file. For audio files that were generated via examples here, the parameters and functions used are also included in the metadata files.
+Several sample audio files with varying formats and metadata. Each audio file's metadata is captured in a JSON and CSV file. For audio files that were generated via examples here, the parameters and functions used are also included in the metadata files. The functions used to generate the metadata files can be found in `metadata.py` and example usage can be seen in `run_metadata.py`.
+
 ```
 sample_audio
  |-- flac

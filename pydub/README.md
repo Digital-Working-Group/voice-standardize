@@ -57,7 +57,7 @@ Please see [Audacity's Installing FFmpeg instructions](https://support.audacityt
 
 
 ## Standardizing Voice Files
-See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments: You may also adjust the arguments passed into `pydub_standardize.standardize()` including:
+See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments. You may also adjust the arguments passed into `pydub_standardize.standardize()` including:
 
 | Keyword Argument | Type | Description | Default Value| 
 | - | - | - | - |
@@ -87,7 +87,7 @@ standardize('../sample_audio/flac/first_ten_Sample_HV_Clip.flac', **kwargs)
 ```
 This would output a .WAV file standardized to have a sampling rate of 16KHz (sampling_rate) and pcm_s16le (out_encoding) encoding. The metadata of the output file will be validated versus the input parameters (run_validate) and an AssertionError will be raised if they don't match (raise_error).
 
-You can see several examples described above in `run_standardize.main()`.
+You can see several examples in `run_standardize.main()`.
 
 ### Sample Input and Output Files and Metadata
 Several sample audio files with varying formats and metadata. Each audio file's metadata is captured in a JSON and CSV file. For audio files that were generated via examples here, the parameters and functions used are also included in the metadata files.

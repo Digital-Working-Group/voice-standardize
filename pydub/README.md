@@ -27,41 +27,42 @@ pip install pydub
 #### FFmpeg Setup
 The following instructions have been taken from [pydub's documentation](http://github.com/jiaaro/pydub?tab=readme-ov-file#getting-ffmpeg-set-up)
 
-> Mac (using homebrew):
+> ### Mac (using homebrew):
 > 
-> # libav
+> #### libav
 > brew install libav
 > 
 > ####    OR    #####
 > 
-> # ffmpeg
+> #### ffmpeg
 > brew install ffmpeg
-> Linux (using aptitude):
+>
+> ### Linux (using aptitude):
 > 
-> # libav
+> #### libav
 > apt-get install libav-tools libavcodec-extra
 > 
 > ####    OR    #####
 > 
-> # ffmpeg
+> #### ffmpeg
 > apt-get install ffmpeg libavcodec-extra
 >
 
 Windows ffmpeg installation:
 1. Download [FFmpeg's package for Windows](https://www.ffmpeg.org/download.html#build-windows)
 2. Locate the download location of the ZIP file and extract to your desired destination (site-packages)
-3. Edit you Environment Variables (Win + S). Click on path > edit > New and enter the path to the extracted folder of FFmpeg.
+3. Edit you Environment Variables (Win + S). Click on path > Edit > New and enter the path to \bin in the extracted FFmpeg folder.
 4. Verify your installation with the command
    ```sh
    ffmpeg -version
    ```
-Please see [Audacity's Insatlling FFmpeg instructions](https://support.audacityteam.org/basics/installing-ffmpeg) for more details on installing FFmpeg on a Window's machine.
+Please see [Audacity's Insatlling FFmpeg instructions](https://support.audacityteam.org/basics/installing-ffmpeg) for more details on installing FFmpeg on a Windows machine.
 
 
 ## Standardizing Voice Files
 After installation, navigate to `run_standardize.py`. In `main()` provides examples that standardize the audio files provided in the `../sample_audio` directory. You may also adjust the arguments passed in to `pds.standardize()` including:
 - audio_fp: path to the audio file to standardize
-- kwargs in `to_wav()`
+- kwargs
     - sampling_rate: target sampling rate
     - out_fmt: target filetype
     - out_encoding: target encoding
@@ -85,8 +86,9 @@ The `run_standardize.py` script generates the below, adjusting to a sampling rat
 | first_ten_Sample_HV_Clip.wav | first_ten_Sample_HV_Clip.wav | 44100 - 16000  | Lavf59.16.100 - pcm_s16le | stereo - mono |
 | mono_first_ten_Sample_HV_Clip.wav | mono_first_ten_Sample_HV_Clip.wav | 16000 - 16000 | Lavf61.9.106 - pcm_s16le | mono - mono |
 
-### Sample Input and Output Files
 
+### Sample Input and Output Files
+```
 sample_audio
  |-- flac
  | |-- first_ten_Sample_HV_Clip.flac
@@ -121,6 +123,7 @@ sample_audio
  | | | |-- mono_first_ten_Sample_HV_Clip.wav
  | | |-- ar_16000_c-a_pcm_s16le_ac_1
  | | | |-- first_ten_Sample_HV_Clip.wav
+```
 
 Python usage:
 ```python

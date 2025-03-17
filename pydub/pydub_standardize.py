@@ -76,7 +76,6 @@ def standardize(audio_fp, **kwargs):
     if to_mono:
         parameter_dict.update({'ac': 1})
     out_root = kwargs.get('out_root', 'pydub')
-
     outpath = get_outpath(audio_fp, out_root, out_fmt, parameter_dict)
     parameters = get_parameters(parameter_dict)
     infile = AudioSegment.from_file(audio_fp, )

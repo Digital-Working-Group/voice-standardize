@@ -129,6 +129,12 @@ sample_audio
  | | | |-- first_ten_Sample_HV_Clip.wav
 ```
 
+## Supported Input and Output Types
+This repository depends on `pydub.AudioSegment.from_file()` to read input files, which uses [ffmpeg](https://www.ffmpeg.org/) or avconv (from [libav](https://github.com/libav/libav)) in the background. Those input file types include at least WAV, raw, PCM, MP3, FLV, and OGG (see [audio_segment.from_file()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
+
+Similarly, this repositroy depends on `pydub.AudioSegment.export()` to write output files, which also uses ffmpeg or avconv in the background. These output file types include at least MP3, WAV, raw, OGG, or other ffmpeg/avconv supported files (see [audio_segment.export()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
+
+
 ## Citations
 ```bibtex
 @inproceedings{commonvoice:2020,

@@ -17,9 +17,9 @@ pip install -r py3-9-6__requirements.txt
 ```
 Install requirements for Python 3.13.1:
 ```sh
-pip install -r py3-13-1_requirements.txt
+pip install -r py3-13-1__requirements.txt
 ```
-If you do not have the supported Python versions installed, you may run the following installation:
+If you do not have the supported Python version installed, you may run the following installation:
 ```sh
 pip install pydub
 ```
@@ -48,7 +48,7 @@ The following instructions have been taken from [pydub's documentation](http://g
 > apt-get install ffmpeg libavcodec-extra
 >
 
-Windows ffmpeg installation:
+Windows FFmpeg installation:
 1. Download [FFmpeg's package for Windows](https://www.ffmpeg.org/download.html#build-windows)
 2. Locate the download location of the ZIP file and extract to your desired destination (site-packages)
 3. Edit you Environment Variables (Win + S). Click on path > Edit > New and enter the path to \bin in the extracted FFmpeg folder.

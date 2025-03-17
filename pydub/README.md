@@ -57,7 +57,7 @@ Please see [Audacity's Installing FFmpeg instructions](https://support.audacityt
 
 
 ## Standardizing Voice Files
-See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments. You may also adjust the arguments passed into `pydub_standardize.standardize()` including:
+See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments. The keyword arguments include:
 
 | Keyword Argument | Type | Description | Default Value| 
 | - | - | - | - |

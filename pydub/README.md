@@ -57,16 +57,17 @@ Please see [Audacity's Installing FFmpeg instructions](https://support.audacityt
 
 
 ## Standardizing Voice Files
-After installation, navigate to `run_standardize.py`. The `main()` function provides examples that standardize the audio files provided in the `../sample_audio` directory. You may also adjust the arguments passed into `pydub_standardize.standardize()` including:
-- audio_fp: path to the audio file to standardize
-- kwargs
-    - sampling_rate: target sampling rate
-    - out_fmt: target filetype
-    - out_encoding: target encoding
-    - out_ffmpeg_kw: a dictionary of additional ffmpeg parameters to be called
-    - to_mono: convert stereo to mono
-    - run_validate: runs a validation check on expected versus actual metadata
-    - raise_error: raises an AssertionError if expected and actual metadata don't match
+See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments: You may also adjust the arguments passed into `pydub_standardize.standardize()` including:
+
+| Keyword Argument | Type | Description | Default Value| 
+| - | - | - | - |
+| sampling_rate | int | The desired sampling rate. | 16000 |
+| out_fmt | str | The desired filetype. | wav |
+| out_encoding | str | The desired encoding. | pcm_s16le |
+| out_ffmpeg_kw | dict | A dictionary of additional ffmpeg parameters to be called. | {} (empty) |
+| to_mono | bool | Convert stereo to mono. | False |
+| run_validate | bool | Run check on expected versus actual metadata. | False |
+| raise_error | bool | Raise an assertion error if expected and actual metadata doesn't match. | False |
 
 ## Usage Example
 
@@ -126,18 +127,6 @@ sample_audio
  | | |-- ar_16000_c-a_pcm_s16le_ac_1
  | | | |-- first_ten_Sample_HV_Clip.wav
 ```
-
-### Keyword Arguments and Default Values (pydub_standardize.standardize())
-
-| Keyword Argument | Type | Description | Default Value| 
-| - | - | - | - |
-| sampling_rate | int | The desired sampling rate. | 16000 |
-| out_fmt | str | The desired filetype. | wav |
-| out_encoding | str | The desired encoding. | pcm_s16le |
-| out_ffmpeg_kw | dict | A dictionary of additional ffmpeg parameters to be called. | {} (empty) |
-| to_mono | bool | Convert stereo to mono. | False |
-| run_validate | bool | Run check on expected versus actual metadata. | False |
-| raise_error | bool | Raise an assertion error if expected and actual metadata doesn't match. | False |
 
 ## Citations
 ```bibtex

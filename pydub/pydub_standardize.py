@@ -4,6 +4,7 @@ standardize via pydub
 """
 import os
 import csv
+from metadata import write_metadata
 from pydub import AudioSegment
 from pydub.utils import mediainfo
 
@@ -36,7 +37,11 @@ def validate_metadata(filepath, parameter_dict, raise_error):
                 'c:a': 'codec_name'}
     info = mediainfo(filepath)
     for option in parameter_dict:
-        if str(parameter_dict[option]) != info[map_keys[option]]:
+        if option == 'compression_level':
+            continue
+        elif option not in map_keys:
+            print(f'{option} is not in the map_keys dictionary. Please add the mapping if you wish for it to be validated.')
+        elif str(parameter_dict[option]) != info[map_keys[option]]:
             mismatch.append([option, parameter_dict[option], info[map_keys[option]]])
     if mismatch != []:
         filename = os.path.splitext(os.path.basename(filepath))[0]
@@ -55,10 +60,9 @@ def get_outpath(audio_fp, out_root, out_fmt, parameter_dict):
     parameter_ext = parameter_ext.replace("-", "").replace(":", "-")
     ## remove front - and : not allowed in Windows paths;
     out_parent_dir = os.path.join(os.path.dirname(audio_fp), out_root, parameter_ext)
-    out_parent_dir = os.path.join(os.path.dirname(audio_fp), out_root, parameter_ext)
     if not os.path.isdir(out_parent_dir):
         os.makedirs(out_parent_dir)
-    return os.path.join(out_parent_dir, out_fname)
+    return os.path.join(out_parent_dir, out_fname).replace("\\", "/")
 
 def standardize(audio_fp, **kwargs):
     """
@@ -71,15 +75,26 @@ def standardize(audio_fp, **kwargs):
     to_mono = kwargs.get('to_mono', False)
     run_validate = kwargs.get('run_validate', False)
     raise_error = kwargs.get('raise_error', False)
+    write_meta = kwargs.get('write_meta', False)
     parameter_dict = {'ar': sampling_rate, 'c:a': out_encoding}
     parameter_dict.update(out_ffmpeg_kw)
     if to_mono:
         parameter_dict.update({'ac': 1})
+    if out_fmt == 'flac':
+        compression_level = kwargs.get('compression_level', 5)
+        parameter_dict.update({'compression_level': compression_level})
     out_root = kwargs.get('out_root', 'pydub')
     outpath = get_outpath(audio_fp, out_root, out_fmt, parameter_dict)
     parameters = get_parameters(parameter_dict)
     infile = AudioSegment.from_file(audio_fp, )
     infile.export(outpath, format=out_fmt, parameters=parameters)
+    if write_meta:
+        meta_kwargs = {'append_json_dict': 
+                        {'command_components':
+                            {'infile': audio_fp,
+                             'format': out_fmt,
+                             'parameters': parameters }}}
+        write_metadata(outpath, **meta_kwargs)
     if run_validate:
         validate_metadata(outpath, parameter_dict, raise_error)
     print(f'See {outpath} for the standardized audio file.')

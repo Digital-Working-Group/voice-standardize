@@ -48,6 +48,26 @@ def metadata_json_to_csv(json_dict, csv_out):
     metadata_dict = format_json_as_csv(json_dict)
     write_metadata_dict_to_csv(metadata_dict, csv_out)
 
+def get_commands(components_dict):
+    """
+    converts command components into pydub and FFmpeg commands
+    inputs: components_dict containing
+                audio_fp: input audio filepath
+                outpath: output audio filepath
+                format: type of file outputted
+                parameters: any switches passed to pydub/FFmpeg
+    returns: dictionary of ffmpeg_command and pydub_command
+    """
+    infile = components_dict['infile']
+    outpath = components_dict['outpath']
+    fmt = components_dict['format']
+    parameters = components_dict['parameters']
+    chain_parameters = ' '.join(parameters)
+    ffmpeg_command = f"ffmpeg -i '{infile}' {chain_parameters} '{outpath}'"
+    pydub_command = f"export('{outpath}', format={fmt}, parameters={parameters})"
+    return {'ffmpeg_command': ffmpeg_command,
+            'pydub_command': pydub_command }
+
 def write_metadata(audio_fp, **kwargs):
     """
     get and write metadata to JSON and CSV;
@@ -58,6 +78,10 @@ def write_metadata(audio_fp, **kwargs):
     fp_without_ext = os.path.splitext(audio_fp)[0]
     json_out = f'{fp_without_ext}.json'
     json_dict = mediainfo_json(audio_fp)
+    if 'command_components' in append_json_dict:
+        append_json_dict['command_components']['outpath'] = audio_fp
+        json_dict.update(get_commands(append_json_dict['command_components']))
+        del append_json_dict['command_components']
     json_dict.update(append_json_dict)
     with open(json_out, 'w') as outfile:
         json.dump(json_dict, outfile, indent=4, sort_keys=False)

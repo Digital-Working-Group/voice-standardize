@@ -62,5 +62,7 @@
             "encoded_by": "ZOOM Handy Recorder H4n",
             "encoder": "Lavf61.9.107"
         }
-    }
+    },
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -compression_level 5 -af aformat=s16:44100 '../sample_audio/flac/first_ten_Sample_HV_Clip.flac'",
+    "pydub_command": "export('../sample_audio/flac/first_ten_Sample_HV_Clip.flac', format=flac, parameters=['-compression_level', '5', '-af', 'aformat=s16:44100'])"
 }

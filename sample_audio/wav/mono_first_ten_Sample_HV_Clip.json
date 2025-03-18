@@ -59,5 +59,6 @@
             "encoded_by": "ZOOM Handy Recorder H4n"
         }
     },
-    "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -ar 44100 -ac 1 '../sample_audio/wav/mono_first_ten_Sample_HV_Clip.wav'"
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -ar 44100 -ac 1 '../sample_audio/wav/mono_first_ten_Sample_HV_Clip.wav'",
+    "pydub_command": "export('../sample_audio/wav/mono_first_ten_Sample_HV_Clip.wav', format=wav, parameters=['-ar', '44100', '-ac', '1'])"
 }

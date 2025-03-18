@@ -4,6 +4,7 @@ get and write metadata
 """
 import os
 import csv
+import re
 import json
 from pydub.utils import mediainfo_json
 
@@ -48,6 +49,20 @@ def metadata_json_to_csv(json_dict, csv_out):
     metadata_dict = format_json_as_csv(json_dict)
     write_metadata_dict_to_csv(metadata_dict, csv_out)
 
+def ffmpeg_to_pydub(ffmpeg_command):
+    """
+    converts ffmpeg command into a pydub command
+    """
+    pattern = r"-i\s+'([^']+)'\s+(.*?)\s+'([^']+\.[a-zA-Z0-9]+)'"
+    match = re.search(pattern, ffmpeg_command)
+    if match:
+        parameters = match.group(2).split(' ')
+        outpath = match.group(3)
+        fmt = outpath.split('.')[-1]
+        return f"export('{outpath}', format={fmt}, parameters={parameters})"
+    else:
+        return 'Could not convert to pydub.'
+
 def get_commands(components_dict):
     """
     converts command components into pydub and FFmpeg commands
@@ -82,6 +97,8 @@ def write_metadata(audio_fp, **kwargs):
         append_json_dict['command_components']['outpath'] = audio_fp
         json_dict.update(get_commands(append_json_dict['command_components']))
         del append_json_dict['command_components']
+    if 'ffmpeg_command' in append_json_dict:
+        append_json_dict['pydub_command'] = ffmpeg_to_pydub(append_json_dict['ffmpeg_command'])
     json_dict.update(append_json_dict)
     with open(json_out, 'w') as outfile:
         json.dump(json_dict, outfile, indent=4, sort_keys=False)

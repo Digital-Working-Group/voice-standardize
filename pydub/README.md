@@ -87,6 +87,17 @@ standardize('../sample_audio/flac/first_ten_Sample_HV_Clip.flac', **kwargs)
 ```
 This would output a .WAV file standardized to have a sampling rate of 16KHz (`sampling_rate`) and pcm_s16le (`out_encoding`) encoding. The metadata of the output file will be validated versus the input parameters (`run_validate`) and an AssertionError will be raised if they don't match (`raise_error`).
 
+For a different example, you could run:
+```python
+from pydub_standardize import standardize
+kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav', 
+          'out_encoding': 'pcm_s16le', 'to_mono': True,
+          'run_validate': True, 'raise_error': True,
+          'write_meta': True }
+    standardize(wav_stereo, **kwargs)
+```
+This would output a .WAV file standardized to have a sampling rate of 16KHz (`sampling_rate`), pcm_s16le (`out_encoding`) encoding and converted to a single channel (`to_mono`). The metadata of the output file will be validated versus the input parameters (`run_validate`) and an AssertionError will be raised if they don't match (`raise_error`).
+
 You can see several examples in `run_standardize.main()`.
 
 ### Sample Input and Output Files and Metadata
@@ -95,38 +106,225 @@ Several sample audio files with varying formats and metadata. Each audio file's 
 ```
 sample_audio
  |-- flac
+ | |-- first_ten_Sample_HV_Clip.csv
  | |-- first_ten_Sample_HV_Clip.flac
+ | |-- first_ten_Sample_HV_Clip.json
+ | |-- mono_first_ten_Sample_HV_Clip.csv
  | |-- mono_first_ten_Sample_HV_Clip.flac
+ | |-- mono_first_ten_Sample_HV_Clip.json
  | |-- pydub
  | | |-- ar_16000_c-a_pcm_s16le
+ | | | |-- mono_first_ten_Sample_HV_Clip.csv
+ | | | |-- mono_first_ten_Sample_HV_Clip.json
  | | | |-- mono_first_ten_Sample_HV_Clip.wav
  | | |-- ar_16000_c-a_pcm_s16le_ac_1
+ | | | |-- first_ten_Sample_HV_Clip.csv
+ | | | |-- first_ten_Sample_HV_Clip.json
  | | | |-- first_ten_Sample_HV_Clip.wav
  |-- m4a
+ | |-- mono_zoom_audio.csv
+ | |-- mono_zoom_audio.json
  | |-- mono_zoom_audio.m4a
  | |-- pydub
  | | |-- ar_16000_c-a_pcm_s16le
+ | | | |-- mono_zoom_audio.csv
+ | | | |-- mono_zoom_audio.json
  | | | |-- mono_zoom_audio.wav
+ | | | |-- sample_zoom_audio.csv
+ | | | |-- sample_zoom_audio.json
  | | | |-- sample_zoom_audio.wav
+ | |-- sample_zoom_audio.csv
+ | |-- sample_zoom_audio.json
  | |-- sample_zoom_audio.m4a
  |-- mp3
+ | |-- common_voice_en_21635524.csv
+ | |-- common_voice_en_21635524.json
  | |-- common_voice_en_21635524.mp3
+ | |-- first_ten_Sample_HV_Clip.csv
+ | |-- first_ten_Sample_HV_Clip.json
  | |-- first_ten_Sample_HV_Clip.mp3
  | |-- pydub
+ | | |-- ar_16000_c-a_flac_compression_level_5
+ | | | |-- common_voice_en_21635524.csv
+ | | | |-- common_voice_en_21635524.flac
+ | | | |-- common_voice_en_21635524.json
  | | |-- ar_16000_c-a_pcm_s16le
+ | | | |-- common_voice_en_21635524.csv
+ | | | |-- common_voice_en_21635524.json
  | | | |-- common_voice_en_21635524.wav
- | | | |-- first_ten_Sample_HV_Clip.wav
- | | |-- ar_16000_c-a_pcm_s16le_ac_1
+ | | | |-- first_ten_Sample_HV_Clip.csv
+ | | | |-- first_ten_Sample_HV_Clip.json
  | | | |-- first_ten_Sample_HV_Clip.wav
  |-- wav
+ | |-- first_ten_Sample_HV_Clip.csv
+ | |-- first_ten_Sample_HV_Clip.json
  | |-- first_ten_Sample_HV_Clip.wav
+ | |-- mono_first_ten_Sample_HV_Clip.csv
+ | |-- mono_first_ten_Sample_HV_Clip.json
  | |-- mono_first_ten_Sample_HV_Clip.wav
  | |-- pydub
+ | | |-- ar_16000_c-a_flac_compression_level_5
+ | | | |-- first_ten_Sample_HV_Clip.csv
+ | | | |-- first_ten_Sample_HV_Clip.flac
+ | | | |-- first_ten_Sample_HV_Clip.json
  | | |-- ar_16000_c-a_pcm_s16le
+ | | | |-- first_ten_Sample_HV_Clip.csv
+ | | | |-- first_ten_Sample_HV_Clip.json
  | | | |-- first_ten_Sample_HV_Clip.wav
+ | | | |-- mono_first_ten_Sample_HV_Clip.csv
+ | | | |-- mono_first_ten_Sample_HV_Clip.json
  | | | |-- mono_first_ten_Sample_HV_Clip.wav
  | | |-- ar_16000_c-a_pcm_s16le_ac_1
+ | | | |-- first_ten_Sample_HV_Clip.csv
+ | | | |-- first_ten_Sample_HV_Clip.json
  | | | |-- first_ten_Sample_HV_Clip.wav
+```
+
+### [sample_audio/mp3/common_voice_en_21635524.json](../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.json)
+```
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "flac",
+            "codec_long_name": "FLAC (Free Lossless Audio Codec)",
+            "codec_type": "audio",
+            "codec_tag_string": "[0][0][0][0]",
+            "codec_tag": "0x0000",
+            "sample_fmt": "s16",
+            "sample_rate": "16000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 16,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/16000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 104064,
+            "duration": "6.504000",
+            "bits_per_raw_sample": "16",
+            "extradata_size": 34,
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            }
+        }
+    ],
+    "format": {
+        "filename": "../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.flac",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "flac",
+        "format_long_name": "raw FLAC",
+        "start_time": "0.000000",
+        "duration": "6.504000",
+        "size": "105460",
+        "bit_rate": "129717",
+        "probe_score": 100,
+        "tags": {
+            "encoder": "Lavf61.9.107"
+        }
+    },
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/mp3/common_voice_en_21635524.mp3' -ar 16000 -c:a flac -compression_level 5 '../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.flac'",
+    "pydub_command": "export('../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.flac', format=flac, parameters=['-ar', '16000', '-c:a', 'flac', '-compression_level', '5'])"
+}
+```
+
+### [sample_audio/mp3/common_voice_en_21635524.csv](../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.csv)
+```
+index,codec_name,codec_long_name,codec_type,codec_tag_string,codec_tag,sample_fmt,sample_rate,channels,channel_layout,bits_per_sample,initial_padding,r_frame_rate,avg_frame_rate,time_base,start_pts,start_time,duration_ts,duration,bits_per_raw_sample,extradata_size,disposition.default,disposition.dub,disposition.original,disposition.comment,disposition.lyrics,disposition.karaoke,disposition.forced,disposition.hearing_impaired,disposition.visual_impaired,disposition.clean_effects,disposition.attached_pic,disposition.timed_thumbnails,disposition.non_diegetic,disposition.captions,disposition.descriptions,disposition.metadata,disposition.dependent,disposition.still_image,disposition.multilayer,format.filename,format.nb_streams,format.nb_programs,format.nb_stream_groups,format.format_name,format.format_long_name,format.start_time,format.duration,format.size,format.bit_rate,format.probe_score,format.tags.encoder
+0,flac,FLAC (Free Lossless Audio Codec),audio,[0][0][0][0],0x0000,s16,16000,1,mono,16,0,0/0,0/0,1/16000,0,0.000000,104064,6.504000,16,34,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.flac,1,0,0,flac,raw FLAC,0.000000,6.504000,105460,129717,100,Lavf61.9.107
+```
+### [sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.json](../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.json)
+```
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "pcm_s16le",
+            "codec_long_name": "PCM signed 16-bit little-endian",
+            "codec_type": "audio",
+            "codec_tag_string": "[1][0][0][0]",
+            "codec_tag": "0x0001",
+            "sample_fmt": "s16",
+            "sample_rate": "16000",
+            "channels": 2,
+            "bits_per_sample": 16,
+            "initial_padding": 0,
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/16000",
+            "duration_ts": 160000,
+            "duration": "10.000000",
+            "bit_rate": "512000",
+            "disposition": {
+                "default": 0,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            },
+            "bits_per_raw_sample": 16
+        }
+    ],
+    "format": {
+        "filename": "../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.wav",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "wav",
+        "format_long_name": "WAV / WAVE (Waveform Audio)",
+        "duration": "10.000000",
+        "size": "640078",
+        "bit_rate": "512062",
+        "probe_score": 99,
+        "tags": {
+            "encoder": "Lavf61.9.107"
+        }
+    },
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -ar 16000 -c:a pcm_s16le '../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.wav'",
+    "pydub_command": "export('../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.wav', format=wav, parameters=['-ar', '16000', '-c:a', 'pcm_s16le'])"
+}
+```
+
+### [sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.csv](../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.csv)
+```
+index,codec_name,codec_long_name,codec_type,codec_tag_string,codec_tag,sample_fmt,sample_rate,channels,bits_per_sample,initial_padding,r_frame_rate,avg_frame_rate,time_base,duration_ts,duration,bit_rate,disposition.default,disposition.dub,disposition.original,disposition.comment,disposition.lyrics,disposition.karaoke,disposition.forced,disposition.hearing_impaired,disposition.visual_impaired,disposition.clean_effects,disposition.attached_pic,disposition.timed_thumbnails,disposition.non_diegetic,disposition.captions,disposition.descriptions,disposition.metadata,disposition.dependent,disposition.still_image,disposition.multilayer,bits_per_raw_sample,format.filename,format.nb_streams,format.nb_programs,format.nb_stream_groups,format.format_name,format.format_long_name,format.duration,format.size,format.bit_rate,format.probe_score,format.tags.encoder
+0,pcm_s16le,PCM signed 16-bit little-endian,audio,[1][0][0][0],0x0001,s16,16000,2,16,0,0/0,0/0,1/16000,160000,10.000000,512000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.wav,1,0,0,wav,WAV / WAVE (Waveform Audio),10.000000,640078,512062,99,Lavf61.9.107
 ```
 
 ## Supported Input and Output Types

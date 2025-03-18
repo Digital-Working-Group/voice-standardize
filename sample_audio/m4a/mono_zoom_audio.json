@@ -73,5 +73,6 @@
             "encoder": "Lavf61.9.106"
         }
     },
-    "ffmpeg_command": "ffmpeg -i '../sample_audio/m4a/sample_zoom_audio.m4a' -ac 1 '../sample_audio/m4a/mono_zoom_audio.m4a'"
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/m4a/sample_zoom_audio.m4a' -ac 1 '../sample_audio/m4a/mono_zoom_audio.m4a'",
+    "pydub_command": "export('../sample_audio/m4a/mono_zoom_audio.m4a', format=m4a, parameters=['-ac', '1'])"
 }

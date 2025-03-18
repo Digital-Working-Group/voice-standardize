@@ -21,8 +21,8 @@ def main():
     # Generated
     kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{wav_mono}' -compression_level 5 -af aformat=s16:44100 '{flac_mono}'"}}
     write_metadata(flac_mono, **kwargs)
-    kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{wav_stereo}' -compression_level 5 -af aformat=s16:44100 '{flac_stereo}'"}}
-    write_metadata(flac_stereo)
+    kwargs = {'append_json_dict': {'ffmpeg_command': f"ffmpeg -i '{wav_stereo}' -compression_level 5 -af aformat=s16:44100 '{flac_stereo}'"}}
+    write_metadata(flac_stereo, **kwargs)
     kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{wav_stereo}' -ar 44100 -ac 2 '{mp3_stereo}'"}}
     write_metadata(mp3_stereo, **kwargs)
     kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{m4a_stereo}' -ac 1 '{m4a_mono}'"}}
@@ -30,7 +30,7 @@ def main():
     kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{wav_stereo}' -ar 44100 -ac 1 '{wav_mono}'"}}
     write_metadata(wav_mono, **kwargs)
 
-    ## Non-generated
+    # Non-generated
     write_metadata(wav_stereo)
     write_metadata(m4a_stereo)
     write_metadata(mp3_mono)

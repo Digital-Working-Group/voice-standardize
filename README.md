@@ -110,6 +110,93 @@ index,codec_name,codec_long_name,codec_type,codec_tag_string,codec_tag,sample_fm
 0,mp3,MP3 (MPEG audio layer 3),audio,[0][0][0][0],0x0000,fltp,48000,1,mono,32,0,0/0,0/0,1/14112000,0,0.000000,91784448,6.504000,64000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,32,../sample_audio/mp3/common_voice_en_21635524.mp3,1,0,0,mp3,MP2/3 (MPEG audio layer 2/3),0.000000,6.504000,52077,64055,51,Lavf57.56.101
 ```
 
+### sample_audio/m4a/mono_zoom_audio.json
+```
+{
+    "streams": [
+        {
+            "index": 0,
+            "codec_name": "aac",
+            "codec_long_name": "AAC (Advanced Audio Coding)",
+            "profile": "LC",
+            "codec_type": "audio",
+            "codec_tag_string": "mp4a",
+            "codec_tag": "0x6134706d",
+            "sample_fmt": "fltp",
+            "sample_rate": "48000",
+            "channels": 1,
+            "channel_layout": "mono",
+            "bits_per_sample": 32,
+            "initial_padding": 0,
+            "id": "0x1",
+            "r_frame_rate": "0/0",
+            "avg_frame_rate": "0/0",
+            "time_base": "1/48000",
+            "start_pts": 0,
+            "start_time": "0.000000",
+            "duration_ts": 360432,
+            "duration": "7.509000",
+            "bit_rate": "70248",
+            "nb_frames": "353",
+            "extradata_size": 5,
+            "disposition": {
+                "default": 1,
+                "dub": 0,
+                "original": 0,
+                "comment": 0,
+                "lyrics": 0,
+                "karaoke": 0,
+                "forced": 0,
+                "hearing_impaired": 0,
+                "visual_impaired": 0,
+                "clean_effects": 0,
+                "attached_pic": 0,
+                "timed_thumbnails": 0,
+                "non_diegetic": 0,
+                "captions": 0,
+                "descriptions": 0,
+                "metadata": 0,
+                "dependent": 0,
+                "still_image": 0,
+                "multilayer": 0
+            },
+            "tags": {
+                "language": "und",
+                "handler_name": "AAC audio",
+                "vendor_id": "[0][0][0][0]"
+            },
+            "bits_per_raw_sample": 32
+        }
+    ],
+    "format": {
+        "filename": "../sample_audio/m4a/mono_zoom_audio.m4a",
+        "nb_streams": 1,
+        "nb_programs": 0,
+        "nb_stream_groups": 0,
+        "format_name": "mov,mp4,m4a,3gp,3g2,mj2",
+        "format_long_name": "QuickTime / MOV",
+        "start_time": "0.000000",
+        "duration": "7.509000",
+        "size": "68334",
+        "bit_rate": "72802",
+        "probe_score": 100,
+        "tags": {
+            "major_brand": "M4A ",
+            "minor_version": "512",
+            "compatible_brands": "M4A isomiso2",
+            "encoder": "Lavf61.9.106"
+        }
+    },
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/m4a/sample_zoom_audio.m4a' -ac 1 '../sample_audio/m4a/mono_zoom_audio.m4a'",
+    "pydub_command": "export('../sample_audio/m4a/mono_zoom_audio.m4a', format=m4a, parameters=['-ac', '1'])"
+}
+```
+### sample_audio/m4a/mono_zoom_audio.json
+```
+index,codec_name,codec_long_name,profile,codec_type,codec_tag_string,codec_tag,sample_fmt,sample_rate,channels,channel_layout,bits_per_sample,initial_padding,id,r_frame_rate,avg_frame_rate,time_base,start_pts,start_time,duration_ts,duration,bit_rate,nb_frames,extradata_size,disposition.default,disposition.dub,disposition.original,disposition.comment,disposition.lyrics,disposition.karaoke,disposition.forced,disposition.hearing_impaired,disposition.visual_impaired,disposition.clean_effects,disposition.attached_pic,disposition.timed_thumbnails,disposition.non_diegetic,disposition.captions,disposition.descriptions,disposition.metadata,disposition.dependent,disposition.still_image,disposition.multilayer,tags,bits_per_raw_sample,format.filename,format.nb_streams,format.nb_programs,format.nb_stream_groups,format.format_name,format.format_long_name,format.start_time,format.duration,format.size,format.bit_rate,format.probe_score,format.tags.major_brand,format.tags.minor_version,format.tags.compatible_brands,format.tags.encoder
+0,aac,AAC (Advanced Audio Coding),LC,audio,mp4a,0x6134706d,fltp,48000,1,mono,32,0,0x1,0/0,0/0,1/48000,0,0.000000,360432,7.509000,70248,353,5,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,"{'language': 'und', 'handler_name': 'AAC audio', 'vendor_id': '[0][0][0][0]'}",32,../sample_audio/m4a/mono_zoom_audio.m4a,1,0,0,"mov,mp4,m4a,3gp,3g2,mj2",QuickTime / MOV,0.000000,7.509000,68334,72802,100,M4A ,512,M4A isomiso2,Lavf61.9.106
+```
+
 ## Citations
 ```bibtex
 @inproceedings{commonvoice:2020,

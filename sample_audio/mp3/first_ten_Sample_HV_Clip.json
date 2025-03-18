@@ -66,5 +66,6 @@
             "encoder": "Lavf61.9.106"
         }
     },
-    "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -ar 44100 -ac 2 '../sample_audio/mp3/first_ten_Sample_HV_Clip.mp3'"
+    "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -ar 44100 -ac 2 '../sample_audio/mp3/first_ten_Sample_HV_Clip.mp3'",
+    "pydub_command": "export('../sample_audio/mp3/first_ten_Sample_HV_Clip.mp3', format=mp3, parameters=['-ar', '44100', '-ac', '2'])"
 }

@@ -18,9 +18,9 @@ def format_json_as_csv(json_dict):
     format_md = json_dict['format']
     metadata_dict = {}
     for stream_k, stream_v in stream_md.items():
-        if stream_k == 'disposition':
+        if stream_k in {'disposition', 'tags'}:
             for disp_k, disp_v in stream_v.items():
-                metadata_dict[f'disposition.{disp_k}'] = disp_v
+                metadata_dict[f'{stream_k}.{disp_k}'] = disp_v
             continue
         metadata_dict[stream_k] = stream_v
     for format_k, format_v in format_md.items():
@@ -60,8 +60,7 @@ def ffmpeg_to_pydub(ffmpeg_command):
         outpath = match.group(3)
         fmt = outpath.split('.')[-1]
         return f"export('{outpath}', format={fmt}, parameters={parameters})"
-    else:
-        return 'Could not convert to pydub.'
+    return f'Could not convert ffmpeg cmd to pydub.\n{ffmpeg_command}'
 
 def get_commands(components_dict):
     """

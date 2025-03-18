@@ -68,10 +68,11 @@ See `run_standardize.main()` for usage examples utilizing audio files in the `..
 | to_mono | bool | Convert stereo to mono. | False |
 | run_validate | bool | Run check on expected versus actual metadata. | False |
 | raise_error | bool | Raise an assertion error if expected and actual metadata doesn't match. | False |
+| write_meta | bool | Writes metadata to JSON and CSV files. | False |
 
 ## Usage Example
 
-The `run_standardize.py` script generates the below, adjusting to a sampling rate of 16KHz, .WAV file, and pcm_s16le encoding. It also includes converting stereo audio files to mono.
+The `run_standardize.py` script can be run using the format below, automatically ajusting to a sampling rate of 16KHz, .WAV file, and pcm_s16le encoding. It also includes converting stereo audio files to mono.
 
 ```python
 from pydub_standardize import standardize
@@ -96,7 +97,7 @@ kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav',
           'write_meta': True }
     standardize(wav_stereo, **kwargs)
 ```
-This would output a .WAV file standardized to have a sampling rate of 16KHz (`sampling_rate`), pcm_s16le (`out_encoding`) encoding and converted to a single channel (`to_mono`). The metadata of the output file will be validated versus the input parameters (`run_validate`) and an AssertionError will be raised if they don't match (`raise_error`).
+This would output a .WAV file standardized to have a sampling rate of 16KHz (`sampling_rate`), pcm_s16le (`out_encoding`) encoding and converted to a single channel (`to_mono`). The metadata of the output file will be validated versus the input parameters (`run_validate`) and an AssertionError will be raised if they don't match (`raise_error`). It would also write a JSON and CSV file recording the metadata (`write_meta`).
 
 You can see several examples in `run_standardize.main()`.
 
@@ -326,6 +327,27 @@ index,codec_name,codec_long_name,codec_type,codec_tag_string,codec_tag,sample_fm
 index,codec_name,codec_long_name,codec_type,codec_tag_string,codec_tag,sample_fmt,sample_rate,channels,bits_per_sample,initial_padding,r_frame_rate,avg_frame_rate,time_base,duration_ts,duration,bit_rate,disposition.default,disposition.dub,disposition.original,disposition.comment,disposition.lyrics,disposition.karaoke,disposition.forced,disposition.hearing_impaired,disposition.visual_impaired,disposition.clean_effects,disposition.attached_pic,disposition.timed_thumbnails,disposition.non_diegetic,disposition.captions,disposition.descriptions,disposition.metadata,disposition.dependent,disposition.still_image,disposition.multilayer,bits_per_raw_sample,format.filename,format.nb_streams,format.nb_programs,format.nb_stream_groups,format.format_name,format.format_long_name,format.duration,format.size,format.bit_rate,format.probe_score,format.tags.encoder
 0,pcm_s16le,PCM signed 16-bit little-endian,audio,[1][0][0][0],0x0001,s16,16000,2,16,0,0/0,0/0,1/16000,160000,10.000000,512000,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,16,../sample_audio/wav/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.wav,1,0,0,wav,WAV / WAVE (Waveform Audio),10.000000,640078,512062,99,Lavf61.9.107
 ```
+
+## Generating metadata for existing files
+See `run_metadata.main()` for usage examples utilizing the scripts in `metadata.py` to generate metadata for exisiting files. If you wish to include the FFmpeg and Pydub commands that would be used to create these files, you must pass in either the components or the command as key word arguments when calling `metadata.write_metadata()`.
+
+### Usage Example
+The `run_metadata.py` script can be run using the format below.
+```
+from metadata import write_metadata
+write_metadata(YOUR_AUDIO_FILEPATH, OPTIONAL_KWARGS)
+```
+
+For instance, you could run:
+```
+from metadata import write_metadata
+flac_mono = '../sample_audio/flac/mono_first_ten_Sample_HV_Clip.flac'
+kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{wav_mono}' -compression_level 5 -af aformat=s16:44100 ' {flac_mono}'"}}
+write_metadata(flac_mono, **kwargs)
+```
+This would output JSON and CSV files that capture the metadata for the file specified, appending the FFmpeg command used to create the file and the equivalent Pydub command to the end of the JSON.
+
+You can see several examples in `run_metadata.main()`
 
 ## Supported Input and Output Types
 This repository depends on `pydub.AudioSegment.from_file()` to read input files, which uses [ffmpeg](https://www.ffmpeg.org/) or avconv (from [libav](https://github.com/libav/libav)) in the background. Those input file types include at least WAV, raw, PCM, MP3, FLV, and OGG (see [audio_segment.from_file()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).

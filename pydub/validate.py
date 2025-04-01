@@ -133,5 +133,5 @@ def validate_files():
     print(f'Please see validation CSV written to {outpath} for more details.')
 
 if __name__ == '__main__':
-    # generate_comparison_files()
+    generate_comparison_files()
     validate_files()

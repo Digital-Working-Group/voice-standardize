@@ -362,7 +362,7 @@ The scripts provded in `validate.py` allows you to check features extracted on y
  validate_files()
 ```
 
-This will output standardized audio to ../sample_audio/FILETYPE/test_output and will output a comparison CSV to ../sample_audio. 
+This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The validation uses sha256 hashes and only compares the output audio files. It excludes the metadata CSV and JSON files due to filepaths being included in the metadata.
 
 ## Citations
 ```bibtex

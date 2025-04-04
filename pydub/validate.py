@@ -23,7 +23,7 @@ def generate_comparison_files():
     wav_stereo = '../sample_audio/wav/first_ten_Sample_HV_Clip.wav'
 
     # Convert to 16KHZ wav pcm_s16le
-    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav', 
+    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav',
               'out_encoding': 'pcm_s16le', 'run_validate': True,
               'raise_error': True, 'write_meta': True, 'out_root':'test_output'}
     standardize(wav_mono, **kwargs)
@@ -35,7 +35,7 @@ def generate_comparison_files():
     standardize(mp3_stereo, **kwargs)
 
     # Convert to 16KHZ wav pcm_s16le stereo to mono
-    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav', 
+    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav',
                  'out_encoding': 'pcm_s16le', 'to_mono': True,
               'run_validate': True, 'raise_error': True,
               'write_meta': True, 'out_root':'test_output' }
@@ -43,7 +43,7 @@ def generate_comparison_files():
     standardize(flac_stereo, **kwargs)
 
     # Convert to 16KHZ flac with compression_level=5
-    kwargs = {'sampling_rate': 16000, 'out_fmt': 'flac', 
+    kwargs = {'sampling_rate': 16000, 'out_fmt': 'flac',
               'out_encoding': 'flac', 'compression_level': 5,
               'run_validate': True, 'raise_error': True,
               'write_meta': True, 'out_root':'test_output' }
@@ -55,8 +55,8 @@ def hash_file(file_path):
     Returns the SHA-256 hash of a file
     """
     hasher = hashlib.sha256()
-    with open(file_path, 'rb') as f:
-        for chunk in iter(lambda: f.read(4096), b""):
+    with open(file_path, 'rb') as infile:
+        for chunk in iter(lambda: infile.read(4096), b""):
             hasher.update(chunk)
     return hasher.hexdigest()
 
@@ -88,15 +88,15 @@ def map_files(audio_type, test_dir, original_dir):
     # Get all files in both directories
     original_files = walk(audio_type, original_dir)
     test_files = walk(audio_type, test_dir)
-    
+
     # Create a mapping of matching files
     matched_files = {}
-    
-    for file in test_files:
+
+    for file, test_outpath in test_files.items():
         if file in original_files:
             if os.path.splitext(file)[1] in ['.csv', '.json']:
                 continue
-            matched_files[file] = (test_files[file], original_files[file])
+            matched_files[file] = (test_outpath, original_files[file])
     return matched_files
 
 def validate_files():
@@ -112,8 +112,8 @@ def validate_files():
     summary = [['sample_input', 'original_output', 'test_output', 'original_output_hash',
                  'test_output_hash', 'output_hashes_match', 'original_audio_hash',
                  'test_audio_hash', 'audio_hash_match']]
-    
-    hash_matches = {'match': 0, 
+
+    hash_matches = {'match': 0,
                     'no match': 0,
                     'audio-only match': 0,
                     'audio-only no match': 0
@@ -140,17 +140,16 @@ def validate_files():
             else:
                 hash_matches['audio-only no match'] +=1
 
-        
             ## Append comparison results
             audio_type = file.split('/')[0]
             sample_input = f'{os.path.basename(file).split(".")[0]}.{audio_type}'
-            summary.append([sample_input, original_output, test_output, 
+            summary.append([sample_input, original_output, test_output,
                                 original_hash, test_hash, hash_match,
-                                original_audio_hash, test_audio_hash, 
+                                original_audio_hash, test_audio_hash,
                                 audio_hash_match])
-        except Exception as e:
-            print(f'Error processing {file}: {e}')
-    
+        except Exception as error:
+            print(f'Error processing {file}: {error}')
+
     outpath = os.path.join('../sample_audio', 'test_comparison.csv')
     with open(outpath, 'w', newline='') as outfile:
         writer = csv.writer(outfile)

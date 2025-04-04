@@ -362,7 +362,7 @@ The scripts provded in `validate.py` allows you to check features extracted on y
  validate_files()
 ```
 
-This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The validation uses sha256 hashes and only compares the output audio files. It excludes the metadata CSV and JSON files due to filepaths being included in the metadata.
+This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The validation uses sha256 hashes and only compares the output audio files. *original_hash, test_hash* and *hash_comparison* all record the results from looking at the entire audio file, including metadata. Running on different versions of FFmpeg may affect this metadata, so see *original_audio_hash, test_audio_hash* and *audio_hash_comparison* to compare only the audio segement. It excludes the metadata CSV and JSON files due to filepaths being included in the metadata.
 
 ## Citations
 ```bibtex

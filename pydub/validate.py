@@ -6,6 +6,7 @@ import os
 import csv
 import hashlib
 from pydub_standardize import standardize
+from pydub import AudioSegment
 
 def generate_comparison_files():
     """
@@ -59,6 +60,13 @@ def hash_file(file_path):
             hasher.update(chunk)
     return hasher.hexdigest()
 
+def hash_audio_segment(audio_segment):
+    """
+    Returns the SHA-256 hash of a pydub.AudioSegment
+    """
+    sample_bytes = audio_segment.get_array_of_samples().tobytes()
+    return hashlib.sha256(sample_bytes).hexdigest()
+
 def walk(audio_type, directory_path):
     """
     Recursively fetches all file paths from a given directory and stores them in a dictionary,
@@ -102,9 +110,14 @@ def validate_files():
         original_dir = f'../sample_audio/{audio_type}/pydub'
         mapped_dict.update(map_files(audio_type, test_dir, original_dir))
     summary = [['sample_input', 'original_output', 'test_output', 'original_output_hash',
-                 'test_output_hash', 'output_hashes_match']]
+                 'test_output_hash', 'output_hashes_match', 'original_audio_hash',
+                 'test_audio_hash', 'audio_hash_match']]
     
-    hash_matches = {'match': 0, 'no match': 0}
+    hash_matches = {'match': 0, 
+                    'no match': 0,
+                    'audio-only match': 0,
+                    'audio-only no match': 0
+                    }
     for file, (original_output, test_output) in mapped_dict.items():
         try:
             ## Hash comparison
@@ -116,12 +129,25 @@ def validate_files():
                 hash_matches['match'] += 1
             else:
                 hash_matches['no match'] +=1
+
+            ## Audio hash only comparison
+            original_audio_hash = hash_audio_segment(AudioSegment.from_file(original_output))
+            test_audio_hash = hash_audio_segment(AudioSegment.from_file(test_output))
+            audio_hash_match = int(original_audio_hash == test_audio_hash)
+
+            if audio_hash_match == 1:
+                hash_matches['audio-only match'] += 1
+            else:
+                hash_matches['audio-only no match'] +=1
+
         
             ## Append comparison results
             audio_type = file.split('/')[0]
             sample_input = f'{os.path.basename(file).split(".")[0]}.{audio_type}'
             summary.append([sample_input, original_output, test_output, 
-                                original_hash, test_hash, hash_match])
+                                original_hash, test_hash, hash_match,
+                                original_audio_hash, test_audio_hash, 
+                                audio_hash_match])
         except Exception as e:
             print(f'Error processing {file}: {e}')
     

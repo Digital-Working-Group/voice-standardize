@@ -115,11 +115,11 @@ def validate_files():
             if hash_match == 1:
                 hash_matches['match'] += 1
             else:
-                hash['no match'] +=1
+                hash_matches['no match'] +=1
         
             ## Append comparison results
             audio_type = file.split('/')[0]
-            sample_input = f'{os.path.basename(file).split('.')[0]}.{audio_type}'
+            sample_input = f'{os.path.basename(file).split(".")[0]}.{audio_type}'
             summary.append([sample_input, original_output, test_output, 
                                 original_hash, test_hash, hash_match])
         except Exception as e:

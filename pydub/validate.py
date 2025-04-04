@@ -80,7 +80,7 @@ def walk(audio_type, directory_path):
             file_map[f'{audio_type}/{relative_path}'] = os.path.join(root, file)
     return file_map
 
-def map_files(audio_type, test_dir, original_dir):
+def map_files(audio_type, original_dir, test_dir):
     """
     Walks each directory and matches test files to original files based on their names.
     Returns a dictionary with file names as keys and a tuple of paths (generated, sample) as values.
@@ -96,7 +96,7 @@ def map_files(audio_type, test_dir, original_dir):
         if file in original_files:
             if os.path.splitext(file)[1] in ['.csv', '.json']:
                 continue
-            matched_files[file] = (test_outpath, original_files[file])
+            matched_files[file] = (original_files[file], test_outpath)
     return matched_files
 
 def validate_files():
@@ -108,7 +108,7 @@ def validate_files():
     for audio_type in ['flac', 'm4a', 'mp3', 'wav']:
         test_dir = f'../sample_audio/{audio_type}/test_output'
         original_dir = f'../sample_audio/{audio_type}/pydub'
-        mapped_dict.update(map_files(audio_type, test_dir, original_dir))
+        mapped_dict.update(map_files(audio_type, original_dir, test_dir))
     summary = [['sample_input', 'original_output', 'test_output', 'original_output_hash',
                  'test_output_hash', 'output_hashes_match', 'original_audio_hash',
                  'test_audio_hash', 'audio_hash_match']]
@@ -158,5 +158,5 @@ def validate_files():
     print(f'Please see validation CSV written to {outpath} for more details.')
 
 if __name__ == '__main__':
-    generate_comparison_files()
+    # generate_comparison_files()
     validate_files()

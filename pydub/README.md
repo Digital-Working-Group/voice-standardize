@@ -380,7 +380,21 @@ The scripts provided in `validate.py` allow you to check features extracted on y
  validate_files()
 ```
 
-This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The validation uses sha256 hashes and only compares the output audio files. *Original_hash, test_hash* and *hash_comparison* all record the results from looking at the entire audio file, including metadata.
+This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The comparison CSV has the following columns:
+
+| Column | Description | Example | 
+| - | - | - |
+| sample_input | Filepath to the source audio file. | first_ten_Sample_HV_Clip.wav |
+| original_output | Filepath to the original output data, pre-generated on the repository. | ../sample_audio/wav/pydub\ar_16000_c-a_flac_compression_level_5\first_ten_Sample_HV_Clip.flac |
+| test_output | Filepath to the test_output data, generated from the source audio file, but on the user's machine. | ../sample_audio/wav/test_output\ar_16000_c-a_flac_compression_level_5\first_ten_Sample_HV_Clip.flac |
+| original_output_hash | sha256 hash generated on original_output. | 4d6... |
+| test_output_hash | sha256 hash generated on test_output. | 4d6... |
+| output_hashes_match | Indicates whether original_output_hash and test_output_hash are equal (1) or not (0) | 1 |
+| original_audio_hash | sha256 hash generated on AudioSegment of original_output. | 698... |
+| test_audio_hash | sha256 hash generated on AudioSegment of test_output. | 698... |
+| audio_hashes_match | Indicates whether original_audio_hash and test_audio_hash are equal (1) or not (0) | 1 |
+
+ The validation uses sha256 hashes and only compares the output audio files. *Original_hash, test_hash* and *hash_comparison* all record the results from looking at the entire audio file, including metadata.
 
 Generating files using different versions of FFmpeg may affect the results (e.g., metadata such as the libavformat version) so please see *original_audio_hash, test_audio_hash* and *audio_hash_comparison* to compare only the audio segement.
 

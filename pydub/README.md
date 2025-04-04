@@ -10,11 +10,11 @@ python --version
 ```
 Install requirements for Python 3.9.6:
 ```sh
-pip install -r py3-9-6__requirements.txt
+pip install -r py3-9-6_requirements.txt
 ```
 Install requirements for Python 3.13.1:
 ```sh
-pip install -r py3-13-1__requirements.txt
+pip install -r py3-13-1_requirements.txt
 ```
 If you do not have the supported Python version installed, you may run the following installation:
 ```sh
@@ -55,9 +55,26 @@ Windows FFmpeg installation:
    ```
 Please see [Audacity's Installing FFmpeg instructions](https://support.audacityteam.org/basics/installing-ffmpeg) for more details on installing FFmpeg on a Windows machine.
 
+Please see the exact FFmpeg version used in this repository ([2025-02-24-git-6232f416b1-full_build](https://github.com/GyanD/codexffmpeg/releases/tag/2025-02-24-git-6232f416b1)):
+
+```sh
+ffmpeg version 2025-02-24-git-6232f416b1-full_build-www.gyan.dev Copyright (c) 2000-2025 the FFmpeg developers
+  built with gcc 14.2.0 (Rev1, Built by MSYS2 project)
+  configuration: --enable-gpl --enable-version3 --enable-static --disable-w32threads --disable-autodetect --enable-fontconfig --enable-iconv --enable-gnutls --enable-lcms2 --enable-libxml2 --enable-gmp --enable-bzlib --enable-lzma --enable-libsnappy --enable-zlib --enable-librist --enable-libsrt --enable-libssh --enable-libzmq --enable-avisynth --enable-libbluray --enable-libcaca --enable-libdvdnav --enable-libdvdread --enable-sdl2 --enable-libaribb24 --enable-libaribcaption --enable-libdav1d --enable-libdavs2 --enable-libopenjpeg --enable-libquirc --enable-libuavs3d --enable-libxevd --enable-libzvbi --enable-libqrencode --enable-librav1e --enable-libsvtav1 --enable-libvvenc --enable-libwebp --enable-libx264 --enable-libx265 --enable-libxavs2 --enable-libxeve --enable-libxvid --enable-libaom --enable-libjxl --enable-libvpx --enable-mediafoundation --enable-libass --enable-frei0r --enable-libfreetype --enable-libfribidi --enable-libharfbuzz --enable-liblensfun --enable-libvidstab --enable-libvmaf --enable-libzimg --enable-amf --enable-cuda-llvm --enable-cuvid --enable-dxva2 --enable-d3d11va --enable-d3d12va --enable-ffnvcodec --enable-libvpl --enable-nvdec --enable-nvenc --enable-vaapi --enable-libshaderc --enable-vulkan --enable-libplacebo --enable-opencl --enable-libcdio --enable-libgme --enable-libmodplug --enable-libopenmpt --enable-libopencore-amrwb --enable-libmp3lame --enable-libshine --enable-libtheora --enable-libtwolame --enable-libvo-amrwbenc --enable-libcodec2 --enable-libilbc --enable-libgsm --enable-liblc3 --enable-libopencore-amrnb --enable-libopus --enable-libspeex --enable-libvorbis --enable-ladspa --enable-libbs2b --enable-libflite --enable-libmysofa --enable-librubberband --enable-libsoxr --enable-chromaprint
+  libavutil      59. 57.100 / 59. 57.100
+  libavcodec     61. 33.102 / 61. 33.102
+  libavformat    61.  9.107 / 61.  9.107
+  libavdevice    61.  4.100 / 61.  4.100
+  libavfilter    10.  9.100 / 10.  9.100
+  libswscale      8. 13.100 /  8. 13.100
+  libswresample   5.  4.100 /  5.  4.100
+  libpostproc    58.  4.100 / 58.  4.100
+Universal media converter
+usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
+```
 
 ## Standardizing Voice Files
-See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments. The keyword arguments include:
+See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments:
 
 | Keyword Argument | Type | Description | Default Value| 
 | - | - | - | - |
@@ -72,7 +89,7 @@ See `run_standardize.main()` for usage examples utilizing audio files in the `..
 
 ## Usage Example
 
-The `run_standardize.py` script can be run using the format below, automatically ajusting to a sampling rate of 16KHz, .WAV file, and pcm_s16le encoding. It also includes converting stereo audio files to mono.
+The `run_standardize.py` script can be run using the format below, automatically adjusting to a sampling rate of 16KHz, .WAV file, and pcm_s16le encoding. It also includes converting stereo audio files to mono.
 
 ```python
 from pydub_standardize import standardize
@@ -91,11 +108,12 @@ This would output a .WAV file standardized to have a sampling rate of 16KHz (`sa
 For a different example, you could run:
 ```python
 from pydub_standardize import standardize
+wav_stereo = '../sample_audio/wav/first_ten_Sample_HV_Clip.wav'
 kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav', 
           'out_encoding': 'pcm_s16le', 'to_mono': True,
           'run_validate': True, 'raise_error': True,
           'write_meta': True }
-    standardize(wav_stereo, **kwargs)
+standardize(wav_stereo, **kwargs)
 ```
 This would output a .WAV file standardized to have a sampling rate of 16KHz (`sampling_rate`), pcm_s16le (`out_encoding`) encoding and converted to a single channel (`to_mono`). The metadata of the output file will be validated versus the input parameters (`run_validate`) and an AssertionError will be raised if they don't match (`raise_error`). It would also write a JSON and CSV file recording the metadata (`write_meta`).
 
@@ -355,14 +373,18 @@ This repository depends on `pydub.AudioSegment.from_file()` to read input files,
 Similarly, this repositroy depends on `pydub.AudioSegment.export()` to write output files, which also uses ffmpeg or avconv in the background. These output file types include at least MP3, WAV, raw, OGG, or other ffmpeg/avconv supported files (see [audio_segment.export()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
 
 ## Validation
-The scripts provded in `validate.py` allows you to check features extracted on your machine using the sample input files against the sample output provided. To perform the validation check, run:
+The scripts provided in `validate.py` allow you to check features extracted on your machine using the sample input files against the sample output provided. To perform the validation check, run:
 ```python
  from validate import generate_comparison_files, validate_files
  generate_comparison_files()
  validate_files()
 ```
 
-This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The validation uses sha256 hashes and only compares the output audio files. *Original_hash, test_hash* and *hash_comparison* all record the results from looking at the entire audio file, including metadata. Generating files using different versions of FFmpeg may affect this metadata, so see *original_audio_hash, test_audio_hash* and *audio_hash_comparison* to compare only the audio segement. It excludes the metadata CSV and JSON files due to filepaths being included in the metadata.
+This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The validation uses sha256 hashes and only compares the output audio files. *Original_hash, test_hash* and *hash_comparison* all record the results from looking at the entire audio file, including metadata.
+
+Generating files using different versions of FFmpeg may affect the results (e.g., metadata such as the libavformat version) so please see *original_audio_hash, test_audio_hash* and *audio_hash_comparison* to compare only the audio segement.
+
+The metadata CSV and JSON files are excluded from these checks, since the audio filepaths will always differ.
 
 ## Citations
 ```bibtex

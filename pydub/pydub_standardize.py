@@ -39,7 +39,7 @@ def validate_metadata(filepath, parameter_dict, raise_error):
     for option in parameter_dict:
         if option == 'compression_level':
             continue
-        elif option not in map_keys:
+        if option not in map_keys:
             print(f'{option} is not in the map_keys dictionary. Please add the mapping if you wish for it to be validated.')
         elif str(parameter_dict[option]) != info[map_keys[option]]:
             mismatch.append([option, parameter_dict[option], info[map_keys[option]]])
@@ -49,12 +49,12 @@ def validate_metadata(filepath, parameter_dict, raise_error):
         write_csv(f'validate/{filename}.csv', mismatch)
     if raise_error:
         assert mismatch == [], f'See differences found during validation of metadata: validate/{filename}.csv'
-    
+
 def get_outpath(audio_fp, out_root, out_fmt, parameter_dict):
     """
     Construct an outpath based on the audio_fp and parameters;
     """
-    audio_base, infile_ext = os.path.splitext(os.path.basename(audio_fp))
+    audio_base, _ = os.path.splitext(os.path.basename(audio_fp))
     out_fname = f'{audio_base}.{out_fmt}'
     parameter_ext = '_'.join([f'{k}_{v}' for k, v in parameter_dict.items()])
     parameter_ext = parameter_ext.replace("-", "").replace(":", "-")
@@ -89,7 +89,7 @@ def standardize(audio_fp, **kwargs):
     infile = AudioSegment.from_file(audio_fp, )
     infile.export(outpath, format=out_fmt, parameters=parameters)
     if write_meta:
-        meta_kwargs = {'append_json_dict': 
+        meta_kwargs = {'append_json_dict':
                         {'command_components':
                             {'infile': audio_fp,
                              'format': out_fmt,

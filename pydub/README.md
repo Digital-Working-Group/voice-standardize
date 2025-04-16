@@ -16,7 +16,7 @@ Install requirements for Python 3.13.1:
 ```sh
 pip install -r py3-13-1_requirements.txt
 ```
-If you do not have the supported Python version installed, you may run the following installation:
+If you do not have the supported Python version installed, you may run the following pip commands:
 ```sh
 pip install pydub
 ```
@@ -46,14 +46,17 @@ The following instructions have been taken from [pydub's documentation](http://g
 >
 
 Windows FFmpeg installation:
-1. Download [FFmpeg's package for Windows](https://www.ffmpeg.org/download.html#build-windows)
-2. Locate the download location of the ZIP file and extract to your desired destination (site-packages)
-3. Edit you Environment Variables (Win + S). Click on path > Edit > New and enter the path to \bin in the extracted FFmpeg folder.
+1. Download [FFmpeg's package for Windows](https://www.ffmpeg.org/download.html#build-windows).
+2. Locate the download location of the ZIP file and extract to your desired destination.
+3. Edit your Environment Variables (Windows Key -> Edit environment variables for your account). Edit Path -> New -> Enter the path to \bin in the extracted FFmpeg folder.
 4. Verify your installation with the command
    ```sh
    ffmpeg -version
    ```
-Please see [Audacity's Installing FFmpeg instructions](https://support.audacityteam.org/basics/installing-ffmpeg) for more details on installing FFmpeg on a Windows machine.
+Please see a few other tutorials on this process for Windows. Note that you may prefer to edit the environment variables for your account and not for the whole system, as shown in some tutorials.
+1. [Audacity](https://support.audacityteam.org/basics/installing-ffmpeg).
+2. [GeeksforGeeks](https://www.geeksforgeeks.org/how-to-install-ffmpeg-on-windows/).
+3. [Transloadit](https://transloadit.com/devtips/how-to-install-ffmpeg-on-windows-a-complete-guide/).
 
 Please see the exact FFmpeg version used in this repository ([2025-02-24-git-6232f416b1-full_build](https://github.com/GyanD/codexffmpeg/releases/tag/2025-02-24-git-6232f416b1)):
 
@@ -89,8 +92,7 @@ See `run_standardize.main()` for usage examples utilizing audio files in the `..
 
 ## Usage Example
 
-The `run_standardize.py` script can be run using the format below, automatically adjusting to a sampling rate of 16KHz, .WAV file, and pcm_s16le encoding. It also includes converting stereo audio files to mono.
-
+The `run_standardize.py` script can be run using the format below.
 ```python
 from pydub_standardize import standardize
 standardize(YOUR_AUDIO_FILEPATH, OPTIONAL_KWARGS)
@@ -120,7 +122,7 @@ This would output a .WAV file standardized to have a sampling rate of 16KHz (`sa
 You can see several examples in `run_standardize.main()`.
 
 ### Sample Input and Output Files and Metadata
-Several sample audio files with varying formats and metadata. Each audio file's metadata is captured in a JSON and CSV file. For audio files that were generated via examples here, the parameters and functions used are also included in the metadata files. The functions used to generate the metadata files can be found in `metadata.py` and example usage can be seen in `run_metadata.py`.
+This repository provides several sample audio files with varying formats and metadata. Each audio file's metadata is captured in a JSON and CSV file. For audio files that were generated via examples here, the parameters and functions used are also included in the metadata files. The functions used to generate the metadata files can be found in `metadata.py` and example usage can be seen in `run_metadata.py`.
 
 ```
 sample_audio
@@ -347,7 +349,7 @@ index,codec_name,codec_long_name,codec_type,codec_tag_string,codec_tag,sample_fm
 ```
 
 ## Generating metadata for existing files
-See `run_metadata.main()` for usage examples utilizing the scripts in `metadata.py` to generate metadata for exisiting files. If you wish to include the FFmpeg and Pydub commands that would be used to create these files, you must pass in either the components or the command as key word arguments when calling `metadata.write_metadata()`.
+See `run_metadata.main()` for usage examples utilizing the scripts in `metadata.py` to generate metadata for exisiting files. If you wish to include the FFmpeg and pydub commands that would be used to create these files, you must pass in either the components or the command as key word arguments when calling `metadata.write_metadata()`.
 
 ### Usage Example
 The `run_metadata.py` script can be run using the format below.
@@ -363,21 +365,23 @@ flac_mono = '../sample_audio/flac/mono_first_ten_Sample_HV_Clip.flac'
 kwargs = {'append_json_dict':{'ffmpeg_command': f"ffmpeg -i '{wav_mono}' -compression_level 5 -af aformat=s16:44100 ' {flac_mono}'"}}
 write_metadata(flac_mono, **kwargs)
 ```
-This would output JSON and CSV files that capture the metadata for the file specified, appending the FFmpeg command used to create the file and the equivalent Pydub command to the end of the JSON.
+This would output JSON and CSV files that capture the metadata for the file specified, appending the FFmpeg command used to create the file and the equivalent pydub command to the end of the JSON.
 
 You can see several examples in `run_metadata.main()`
 
 ## Supported Input and Output Types
 This repository depends on `pydub.AudioSegment.from_file()` to read input files, which uses [ffmpeg](https://www.ffmpeg.org/) or avconv (from [libav](https://github.com/libav/libav)) in the background. Those input file types include at least WAV, raw, PCM, MP3, FLV, and OGG (see [audio_segment.from_file()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
 
-Similarly, this repositroy depends on `pydub.AudioSegment.export()` to write output files, which also uses ffmpeg or avconv in the background. These output file types include at least MP3, WAV, raw, OGG, or other ffmpeg/avconv supported files (see [audio_segment.export()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
+Similarly, this repository depends on `pydub.AudioSegment.export()` to write output files, which also uses ffmpeg or avconv in the background. These output file types include at least MP3, WAV, raw, OGG, or other ffmpeg/avconv supported files (see [audio_segment.export()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
 
 ## Validation
-The scripts provided in `validate.py` allow you to check features extracted on your machine using the sample input files against the sample output provided. To perform the validation check, run:
+The scripts provided in `validate.py` allow you to check output extracted on your machine using the sample input files against the sample output provided. To perform the validation check, see `run_validate.py`:
 ```python
- from validate import generate_comparison_files, validate_files
- generate_comparison_files()
- validate_files()
+from validate import generate_comparison_files, validate_files
+
+if __name__ == '__main__':
+    generate_comparison_files()
+    validate_files()
 ```
 
 This will output standardized audio to ../sample_audio/*FILETYPE*/test_output and will output a comparison CSV to ../sample_audio. The comparison CSV has the following columns:
@@ -386,7 +390,7 @@ This will output standardized audio to ../sample_audio/*FILETYPE*/test_output an
 | - | - | - |
 | sample_input | Filepath to the source audio file. | first_ten_Sample_HV_Clip.wav |
 | original_output | Filepath to the original output data, pre-generated on the repository. | ../sample_audio/wav/pydub\ar_16000_c-a_flac_compression_level_5\first_ten_Sample_HV_Clip.flac |
-| test_output | Filepath to the test_output data, generated from the source audio file, but on the user's machine. | ../sample_audio/wav/test_output\ar_16000_c-a_flac_compression_level_5\first_ten_Sample_HV_Clip.flac |
+| test_output | Filepath to the test_output data, generated from the source audio file, but via the user's machine. | ../sample_audio/wav/test_output\ar_16000_c-a_flac_compression_level_5\first_ten_Sample_HV_Clip.flac |
 | original_output_hash | sha256 hash generated on original_output. | 4d6... |
 | test_output_hash | sha256 hash generated on test_output. | 4d6... |
 | output_hashes_match | Indicates whether original_output_hash and test_output_hash are equal (1) or not (0) | 1 |

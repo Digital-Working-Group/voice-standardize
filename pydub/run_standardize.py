@@ -19,7 +19,7 @@ def main():
     wav_stereo = '../sample_audio/wav/first_ten_Sample_HV_Clip.wav'
 
     # Convert to 16KHZ wav pcm_s16le
-    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav', 
+    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav',
               'out_encoding': 'pcm_s16le', 'run_validate': True,
               'raise_error': True, 'write_meta': True}
     standardize(wav_mono, **kwargs)
@@ -31,7 +31,7 @@ def main():
     standardize(mp3_stereo, **kwargs)
 
     # Convert to 16KHZ wav pcm_s16le stereo to mono
-    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav', 
+    kwargs = {'sampling_rate': 16000, 'out_fmt': 'wav',
                  'out_encoding': 'pcm_s16le', 'to_mono': True,
               'run_validate': True, 'raise_error': True,
               'write_meta': True }
@@ -39,7 +39,7 @@ def main():
     standardize(flac_stereo, **kwargs)
 
     # Convert to 16KHZ flac with compression_level=5
-    kwargs = {'sampling_rate': 16000, 'out_fmt': 'flac', 
+    kwargs = {'sampling_rate': 16000, 'out_fmt': 'flac',
               'out_encoding': 'flac', 'compression_level': 5,
               'run_validate': True, 'raise_error': True,
               'write_meta': True }

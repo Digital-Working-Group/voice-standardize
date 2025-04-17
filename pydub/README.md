@@ -16,7 +16,7 @@ Install requirements for Python 3.13.1:
 ```sh
 pip install -r py3-13-1_requirements.txt
 ```
-If you do not have the supported Python version installed, you may run the following pip commands:
+If using a different Python version, you may run the following pip commands:
 ```sh
 pip install pydub
 ```

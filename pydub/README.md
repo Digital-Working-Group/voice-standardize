@@ -368,7 +368,7 @@ write_metadata(flac_mono, **kwargs)
 ```
 This would output JSON and CSV files that capture the metadata for the file specified, appending the FFmpeg command used to create the file and the equivalent pydub command to the end of the JSON.
 
-You can see several examples in `run_metadata.main()`
+You can see several examples in `run_metadata.main()`.
 
 ## Supported Input and Output Types
 This repository depends on `pydub.AudioSegment.from_file()` to read input files, which uses [ffmpeg](https://www.ffmpeg.org/) or avconv (from [libav](https://github.com/libav/libav)) in the background. Those input file types include at least WAV, raw, PCM, MP3, FLV, and OGG (see [audio_segment.from_file()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).

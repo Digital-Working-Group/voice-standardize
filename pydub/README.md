@@ -1,8 +1,10 @@
 # Voice Standardize: pydub
 
-This repository contains scripts that show examples of how to use [pydub](https://github.com/jiaaro/pydub) to standardize digital voice audio files with varying metadata to a standard format.
+This repository contains scripts that show examples of how to use [pydub](https://github.com/jiaaro/pydub) to standardize digital voice audio files with varying metadata to a standard format. The scripts can be run without [Docker](https://docs.docker.com/engine/install/) or with it.
 
 ## Installation
+
+### Without Docker
 
 Check your Python version:
 ```sh
@@ -20,7 +22,27 @@ If using a different Python version, you may run the following pip commands:
 ```sh
 pip install pydub
 ```
+### With Docker
 
+[Docker](https://docs.docker.com/engine/install/) is required for building and running the docker container. Docker version 24.0.6, build ed223bc was used to develop and test these scripts.
+
+Run the necessary docker build and run commands provided in the build_docker.sh and run_docker.sh scripts. These .sh scripts were tested on Linux (CentOS 7).
+
+```sh
+./build_docker.sh
+./run_docker.sh
+```
+
+The Docker commands included in the .sh scripts are:
+```sh
+docker build -t $docker_name .
+## build the container image under the name 'docker_name' based on the Dockerfile specifications
+docker run -v $(pwd):/scripts -it --rm --name $container_name $docker_name bash
+## run the built container image ('docker_name') under the container name 'container_name'
+## mounts the current working directory $(pwd) as a volume to /scripts within the container
+```
+
+Please see Docker's documentation for more information ([docker build](https://docs.docker.com/build/), [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/), [docker run](https://docs.docker.com/reference/cli/docker/container/run/)).
 ### FFmpeg Setup
 The following instructions have been taken from [pydub's documentation](http://github.com/jiaaro/pydub?tab=readme-ov-file#getting-ffmpeg-set-up)
 
@@ -404,6 +426,8 @@ This will output standardized audio to ../sample_audio/*FILETYPE*/test_output an
 Generating files using different versions of FFmpeg may affect the results (e.g., metadata such as the libavformat version) so please see *original_audio_hash, test_audio_hash* and *audio_hash_comparison* to compare only the audio segement.
 
 The metadata CSV and JSON files are excluded from these checks, since the audio filepaths will always differ.
+
+Please see `windows_py3-13-1.md`, `windows_py3-9-6.md`, and `debian_docker_py3-13-1.md` for copies of the expected run_validate.py output for Windows (Python 3.13.1), Windows (Python 3.9.6), and Debian via Docker (Python 3.13.1) respectively.
 
 ## Citations
 ```bibtex

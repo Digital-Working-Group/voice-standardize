@@ -1,6 +1,6 @@
 # Debian via Docker, Python 3.13.1
 ## ffmpeg version
-```sh
+```
 ffmpeg version 6.1.1 Copyright (c) 2000-2023 the FFmpeg developers
 built with gcc 11.2.0 (Anaconda gcc)
 configuration: --prefix=/opt/conda --cc=/croot/ffmpeg_1743153284778/_build_env/bin/x86_64-conda-linux-gnu-cc --ar=/croot/ffmpeg_1743153284778/_build_env/bin/x86_64-conda-linux-gnu-ar --nm=/croot/ffmpeg_1743153284778/_build_env/bin/x86_64-conda-linux-gnu-nm --ranlib=/croot/ffmpeg_1743153284778/_build_env/bin/x86_64-conda-linux-gnu-ranlib --strip=/croot/ffmpeg_1743153284778/_build_env/bin/x86_64-conda-linux-gnu-strip --disable-doc --enable-swresample --enable-swscale --enable-openssl --enable-libxml2 --enable-libtheora --enable-demuxer=dash --enable-postproc --enable-hardcoded-tables --enable-libfreetype --enable-libharfbuzz --enable-libfontconfig --enable-libdav1d --enable-zlib --enable-libaom --enable-pic --enable-shared --disable-static --disable-gpl --enable-version3 --disable-sdl2 --enable-libopenh264 --enable-libopus --enable-libmp3lame --enable-libopenjpeg --enable-libvorbis --enable-pthreads --enable-libtesseract --enable-libvpx
@@ -13,7 +13,7 @@ libswscale      7.  5.100 /  7.  5.100
 libswresample   4. 12.100 /  4. 12.100
 ```
 ## run_validate.py
-```sh
+```
 ../sample_audio/wav/test_output/ar_16000_c-a_pcm_s16le/mono_first_ten_Sample_HV_Clip.json
 ../sample_audio/wav/test_output/ar_16000_c-a_pcm_s16le/mono_first_ten_Sample_HV_Clip.csv
 See ../sample_audio/wav/test_output/ar_16000_c-a_pcm_s16le/mono_first_ten_Sample_HV_Clip.wav for the standardized audio file.

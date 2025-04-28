@@ -45,8 +45,9 @@ def validate_metadata(filepath, parameter_dict, raise_error):
             mismatch.append([option, parameter_dict[option], info[map_keys[option]]])
     if mismatch != []:
         filename = os.path.splitext(os.path.basename(filepath))[0]
+        parent_dir = os.path.dirname(filepath)
         mismatch.insert(0, ['option', 'expected', 'actual'])
-        write_csv(f'validate/{filename}.csv', mismatch)
+        write_csv(f'{parent_dir}/validate_{filename}.csv', mismatch)
     if raise_error:
         assert mismatch == [], f'See differences found during validation of metadata: validate/{filename}.csv'
 

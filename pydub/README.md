@@ -130,6 +130,8 @@ standardize('../sample_audio/flac/first_ten_Sample_HV_Clip.flac', **kwargs)
 ```
 This would output a .WAV file standardized to have a sampling rate of 16KHz (`sampling_rate`) and pcm_s16le (`out_encoding`) encoding. The metadata of the output file will be validated versus the input parameters (`run_validate`) and an AssertionError will be raised if they don't match (`raise_error`).
 
+`run_validate=True` checks channels (ac), sample_rate (ar), codec_name (c:a), see map_keys in `pydub_standardize.validate_metadata()` and writes `validate_{filename}.csv` in the same directory as the output audio file.
+
 For a different example, you could run:
 ```python
 from pydub_standardize import standardize

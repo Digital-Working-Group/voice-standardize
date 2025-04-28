@@ -397,6 +397,8 @@ This repository depends on `pydub.AudioSegment.from_file()` to read input files,
 
 Similarly, this repository depends on `pydub.AudioSegment.export()` to write output files, which also uses ffmpeg or avconv in the background. These output file types include at least MP3, WAV, raw, OGG, or other ffmpeg/avconv supported files (see [audio_segment.export()](https://github.com/jiaaro/pydub/blob/master/pydub/audio_segment.py)).
 
+This repository includes test input audio files of the following formats (FLAC, m4a, mp3, WAV) and includes test output audio files of the following formats (WAV, FLAC).
+
 ## Validation
 The scripts provided in `validate.py` allow you to check output extracted on your machine using the sample input files against the provided sample output. To perform the validation check, see `run_validate.py`:
 ```python

@@ -156,7 +156,3 @@ def validate_files():
         writer.writerows(summary)
     print(f'Summary: {hash_matches}')
     print(f'Please see validation CSV written to {outpath} for more details.')
-
-if __name__ == '__main__':
-    # generate_comparison_files()
-    validate_files()

@@ -58,7 +58,7 @@
         "bit_rate": "129717",
         "probe_score": 100,
         "tags": {
-            "encoder": "Lavf61.7.100"
+            "encoder": "Lavf61.9.107"
         }
     },
     "ffmpeg_command": "ffmpeg -i '../sample_audio/mp3/common_voice_en_21635524.mp3' -ar 16000 -c:a flac -compression_level 5 '../sample_audio/mp3/pydub/ar_16000_c-a_flac_compression_level_5/common_voice_en_21635524.flac'",

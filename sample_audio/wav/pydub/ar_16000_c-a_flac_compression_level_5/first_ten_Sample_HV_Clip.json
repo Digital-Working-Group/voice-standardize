@@ -58,7 +58,7 @@
         "bit_rate": "270569",
         "probe_score": 100,
         "tags": {
-            "encoder": "Lavf61.7.100"
+            "encoder": "Lavf61.9.107"
         }
     },
     "ffmpeg_command": "ffmpeg -i '../sample_audio/wav/first_ten_Sample_HV_Clip.wav' -ar 16000 -c:a flac -compression_level 5 '../sample_audio/wav/pydub/ar_16000_c-a_flac_compression_level_5/first_ten_Sample_HV_Clip.flac'",

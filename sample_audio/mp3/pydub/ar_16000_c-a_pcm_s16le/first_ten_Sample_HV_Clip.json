@@ -54,7 +54,7 @@
         "bit_rate": "512062",
         "probe_score": 99,
         "tags": {
-            "encoder": "Lavf61.7.100"
+            "encoder": "Lavf61.9.107"
         }
     },
     "ffmpeg_command": "ffmpeg -i '../sample_audio/mp3/first_ten_Sample_HV_Clip.mp3' -ar 16000 -c:a pcm_s16le '../sample_audio/mp3/pydub/ar_16000_c-a_pcm_s16le/first_ten_Sample_HV_Clip.wav'",

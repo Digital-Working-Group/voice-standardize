@@ -54,7 +54,7 @@
         "bit_rate": "256083",
         "probe_score": 99,
         "tags": {
-            "encoder": "Lavf61.7.100"
+            "encoder": "Lavf61.9.107"
         }
     },
     "ffmpeg_command": "ffmpeg -i '../sample_audio/m4a/mono_zoom_audio.m4a' -ar 16000 -c:a pcm_s16le '../sample_audio/m4a/pydub/ar_16000_c-a_pcm_s16le/mono_zoom_audio.wav'",

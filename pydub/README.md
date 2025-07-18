@@ -99,6 +99,8 @@ Universal media converter
 usage: ffmpeg [options] [[infile options] -i infile]... {[outfile options] outfile}...
 ```
 
+## Jupyter Notebook Examples
+Please run [jupyter notebook](https://docs.jupyter.org/en/latest/running.html) and see `pydub/voice_standardize_examples.ipynb` for an interactive set of examples. Also, see the usage example sections below.
 ## Standardizing Voice Files
 See `run_standardize.main()` for usage examples utilizing audio files in the `../sample_audio` directory. The `pydub_standardize.standardize()` function takes in an input audio filepath (`audio_fp`) and a set of keyword arguments:
 

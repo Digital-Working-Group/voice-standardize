@@ -1,3 +1,4 @@
 __pycache__
 test_output/
 test_comparison.csv
+.ipynb_checkpoints/

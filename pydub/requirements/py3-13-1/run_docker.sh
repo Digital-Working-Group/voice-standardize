@@ -13,5 +13,5 @@ then
 else
     docker_name="debian-pydub-python3_13_1"
 fi
-dir_up=$(realpath "../")
+dir_up=$(realpath "../../../")
 docker run -v $dir_up:/scripts/ -it --rm --name $container_name $docker_name bash

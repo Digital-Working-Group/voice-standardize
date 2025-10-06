@@ -4,5 +4,5 @@ RUN echo "source activate env" > ~/.bashrc
 RUN conda install ffmpeg
 ENV PATH /opt/conda/envs/env/bin:$PATH
 WORKDIR /scripts/pydub
-COPY py3-13-1_requirements.txt .
-RUN pip install --no-cache-dir -r py3-13-1_requirements.txt
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt

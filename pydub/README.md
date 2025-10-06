@@ -12,11 +12,11 @@ python --version
 ```
 Install requirements for Python 3.9.6:
 ```sh
-pip install -r py3-9-6_requirements.txt
+pip install -r requirements/py3-9-6/requirements.txt
 ```
 Install requirements for Python 3.13.1:
 ```sh
-pip install -r py3-13-1_requirements.txt
+pip install -r requirements/py3-13-1/requirements.txt
 ```
 If using a different Python version, you may run the following pip commands:
 ```sh

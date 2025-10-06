@@ -2,48 +2,55 @@
 
 This repository contains scripts that show examples of how to use [pydub](https://github.com/jiaaro/pydub) to standardize digital voice audio files with varying metadata to a standard format. The scripts can be run without [Docker](https://docs.docker.com/engine/install/) or with it.
 
-## Installation
+## Installation and Setup
 
-### Without Docker
+### Python Requirements
+```
+pydub
+   |-- requirements
+   |   |-- py3-13-1
+   |   |   |-- Dockerfile
+   |   |   |-- build_docker.sh
+   |   |   |-- pip-licenses.md
+   |   |   |-- requirements.txt
+   |   |   |-- run_docker.sh
+   |   |-- py3-9-6
+   |   |   |-- Dockerfile
+   |   |   |-- build_docker.sh
+   |   |   |-- pip-licenses.md
+   |   |   |-- requirements.txt
+   |   |   |-- run_docker.sh
+```
 
 Check your Python version:
 ```sh
 python --version
 ```
+See [Anaconda](https://www.anaconda.com/download/success) as an option to switch between Python versions. This repository has been tested with Python 3.10.11.
+
 Install requirements for Python 3.9.6:
 ```sh
-pip install -r requirements/py3-9-6/requirements.txt
+pip install -r requirements/py3-9-6/requirements.txt 
 ```
+
 Install requirements for Python 3.13.1:
 ```sh
-pip install -r requirements/py3-13-1/requirements.txt
-```
-If using a different Python version, you may run the following pip commands:
-```sh
-pip install pydub
-```
-### With Docker
-
-[Docker](https://docs.docker.com/engine/install/) is required for building and running the docker container. Docker version 24.0.6, build ed223bc was used to develop and test these scripts.
-
-Run the necessary docker build and run commands provided in the `build_docker.sh` and `run_docker.sh` scripts. These .sh scripts were tested on Linux (CentOS 7).
-
-```sh
-./build_docker.sh
-./run_docker.sh
+pip install -r requirements/py3-13-1/requirements.txt 
 ```
 
-The Docker commands included in the .sh scripts are:
-```sh
-docker build -t $docker_name .
-## build the container image under the name 'docker_name' based on the Dockerfile specifications
-docker run -v $(pwd):/scripts -it --rm --name $container_name $docker_name bash
-## run the built container image ('docker_name') under the container name 'container_name'
-## mounts the current working directory $(pwd) as a volume to /scripts within the container
-```
+Note: you may use the pip install command described above even if you are working with a different Python version, but you may need to adjust the requirements.txt file to fit any dependencies specific to that Python version.
+
+### Requirements.txt License Information
+License information for each set of requirements.txt can be found in their respective `pip-licenses.md` file within the requirements/python[version] folders.
+
+### Docker Support
+[Docker](https://docs.docker.com/engine/install/) support can be found via the `Dockerfile` and `build_docker.sh` and `run_docker.sh` files.
 
 Please see Docker's documentation for more information ([docker build](https://docs.docker.com/build/), [Dockerfile](https://docs.docker.com/build/concepts/dockerfile/), [docker run](https://docs.docker.com/reference/cli/docker/container/run/)).
+
 ### FFmpeg Setup
+If utilizing Docker, FFmpeg is already installed within the Docker environment.
+
 The following instructions have been taken from [pydub's documentation](http://github.com/jiaaro/pydub?tab=readme-ov-file#getting-ffmpeg-set-up)
 
 > ### Mac (using homebrew):

@@ -441,7 +441,7 @@ Generating files using different versions of FFmpeg may affect the results (e.g.
 
 The metadata CSV and JSON files are excluded from these checks, since the audio filepaths will always differ.
 
-Please see `windows_py3-13-1.md`, `windows_py3-9-6.md`, and `debian_docker_py3-13-1.md` for copies of the expected run_validate.py output for Windows (Python 3.13.1), Windows (Python 3.9.6), and Debian via Docker (Python 3.13.1) respectively.
+Please see the `validate_<docker/windows>.md` files in the respective `requirements/py<version>/` folders for the expected run_validate.py output.
 
 ## Citations
 ```bibtex

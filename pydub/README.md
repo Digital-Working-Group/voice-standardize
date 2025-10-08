@@ -14,12 +14,16 @@ pydub
    |   |   |-- pip-licenses.md
    |   |   |-- requirements.txt
    |   |   |-- run_docker.sh
+   |   |   |-- validate_docker.md
+   |   |   |-- validate_windows.md
    |   |-- py3-9-6
    |   |   |-- Dockerfile
    |   |   |-- build_docker.sh
    |   |   |-- pip-licenses.md
    |   |   |-- requirements.txt
    |   |   |-- run_docker.sh
+   |   |   |-- validate_docker.md
+   |   |   |-- validate_windows.md
 ```
 
 Check your Python version:
